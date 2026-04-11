@@ -185,11 +185,11 @@ function App() {
               Replace the links below with your final investor documents.
             </p>
             <div className="inline-actions">
-              <a className="btn btn-primary" href="/pitchdeck/VULNITEK-Investor-Pitch-Deck.pdf" target="_blank" rel="noreferrer">
-                Open pitch deck
+              <a className="btn btn-primary" href="#contact">
+                Request investor presentation
               </a>
-              <a className="btn btn-secondary" href="/pitchdeck/VULNITEK-Investor-Pitch-Deck.pdf" download>
-                Download pitch deck PDF
+              <a className="btn btn-secondary" href="mailto:info@leecognitek.com?subject=Investor%20Presentation%20Request">
+                Email investor relations
               </a>
             </div>
           </article>
@@ -218,8 +218,8 @@ function App() {
               <p>Email: <a href="mailto:info@leecognitek.com">info@leecognitek.com</a></p>
               <p>Phone: <a href="tel:+919010994629">+91 90109 94629</a></p>
               <div className="inline-actions">
-                <a className="btn btn-secondary" href="/pitchdeck/VULNITEK-Investor-Pitch-Deck.pdf" target="_blank" rel="noreferrer">
-                  Investor deck
+                <a className="btn btn-secondary" href="mailto:info@leecognitek.com?subject=Investor%20Presentation%20Request">
+                  Request investor presentation
                 </a>
               </div>
             </article>
