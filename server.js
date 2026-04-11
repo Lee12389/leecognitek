@@ -47,6 +47,7 @@ async function sendLeadMail(lead) {
     `Phone: ${lead.phone || "-"}`,
     `Company: ${lead.company || "-"}`,
     `Interest: ${lead.interest || "-"}`,
+    `Investor request: ${lead.investor_request ? "yes" : "no"}`,
     "",
     lead.message || "",
   ].join("\n");
@@ -54,7 +55,7 @@ async function sendLeadMail(lead) {
   await transporter.sendMail({
     from,
     to,
-    subject: `New website lead: ${lead.name}`,
+    subject: `${lead.investor_request ? "[INVESTOR] " : ""}New website lead: ${lead.name}`,
     text,
   });
   return { mailed: true };
@@ -69,10 +70,15 @@ app.post("/api/contact", async (req, res) => {
       phone: String(body.phone || "").trim(),
       company: String(body.company || "").trim(),
       interest: String(body.interest || "").trim(),
+      investor_request: Boolean(body.investorRequest),
       message: String(body.message || "").trim(),
       source: "website",
       received_at: new Date().toISOString(),
     };
+
+    if (lead.investor_request && !lead.interest) {
+      lead.interest = "Investor discussion";
+    }
 
     if (!lead.name || !lead.email || !lead.message) {
       return res.status(400).json({ ok: false, error: "Name, email, and message are required." });

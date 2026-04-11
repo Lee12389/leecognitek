@@ -1,5 +1,6 @@
 import "./App.css";
 import { useState } from "react";
+import brandLogo from "./assets/leecognitek-logo.jpg";
 
 const products = [
   {
@@ -53,14 +54,15 @@ function App() {
     phone: "",
     company: "",
     interest: "Vulnitek",
+    investorRequest: false,
     message: "",
   });
   const [formBusy, setFormBusy] = useState(false);
   const [formMsg, setFormMsg] = useState("");
 
   const onFormChange = (e) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+    const { name, value, type, checked } = e.target;
+    setForm((prev) => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
   };
 
   const onSubmit = async (e) => {
@@ -84,6 +86,7 @@ function App() {
         phone: "",
         company: "",
         interest: "Vulnitek",
+        investorRequest: false,
         message: "",
       });
     } catch (err) {
@@ -102,7 +105,8 @@ function App() {
       <main className="site">
         <header className="topbar">
           <a className="brand" href="#home">
-            LeeCognitek
+            <img src={brandLogo} alt="LeeCognitek logo" className="brand-logo" />
+            <span>LeeCognitek</span>
           </a>
           <nav className="topnav">
             <a href="#products">Products</a>
@@ -241,6 +245,17 @@ function App() {
                   <option value="Services">Services</option>
                   <option value="Investor discussion">Investor discussion</option>
                 </select>
+              </div>
+              <div className="form-row form-row-single">
+                <label className="checkbox-row">
+                  <input
+                    type="checkbox"
+                    name="investorRequest"
+                    checked={form.investorRequest}
+                    onChange={onFormChange}
+                  />
+                  <span>This is an investor presentation request</span>
+                </label>
               </div>
               <div className="form-row form-row-single">
                 <textarea name="message" value={form.message} onChange={onFormChange} placeholder="Tell us what you need" rows={4} required />
