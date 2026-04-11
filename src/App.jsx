@@ -106,7 +106,7 @@ function App() {
         <header className="topbar">
           <a className="brand" href="#home">
             <img src={brandLogo} alt="LeeCognitek logo" className="brand-logo" />
-            <span>LeeCognitek</span>
+            <span>LCT | LeeCognitek</span>
           </a>
           <nav className="topnav">
             <a href="#products">Products</a>
@@ -120,7 +120,7 @@ function App() {
           <p className="kicker">AI Systems. Security. Automation.</p>
           <h1>We build intelligent software products for high-stakes enterprise execution.</h1>
           <p className="subheadline">
-            LeeCognitek is an AI company focused on applied intelligence across cybersecurity, automation, and analytics.
+            LeeCognitek AI &amp; Software Solutions Pvt Ltd (LCT) is an AI company focused on applied intelligence across cybersecurity, automation, and analytics.
             Our flagship stack includes Vulnitek, Mantrika, and Lstat with partner-led domain depth.
           </p>
           <div className="hero-actions">
