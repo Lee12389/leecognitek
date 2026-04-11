@@ -1,4 +1,5 @@
 import "./App.css";
+import { useState } from "react";
 
 const products = [
   {
@@ -46,6 +47,53 @@ const services = [
 ];
 
 function App() {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    company: "",
+    interest: "Vulnitek",
+    message: "",
+  });
+  const [formBusy, setFormBusy] = useState(false);
+  const [formMsg, setFormMsg] = useState("");
+
+  const onFormChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    setFormMsg("");
+    setFormBusy(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const out = await res.json();
+      if (!res.ok || !out?.ok) {
+        throw new Error(out?.error || "Failed to submit contact form.");
+      }
+      setFormMsg("Thanks. We received your details and will contact you shortly.");
+      setForm({
+        name: "",
+        email: "",
+        phone: "",
+        company: "",
+        interest: "Vulnitek",
+        message: "",
+      });
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      setFormMsg(message || "Submission failed.");
+    } finally {
+      setFormBusy(false);
+    }
+  };
+
   return (
     <div className="page-shell">
       <div className="bg-orb orb-a" />
@@ -137,11 +185,11 @@ function App() {
               Replace the links below with your final investor documents.
             </p>
             <div className="inline-actions">
-              <a className="btn btn-primary" href="#">
+              <a className="btn btn-primary" href="/pitchdeck/VULNITEK-Investor-Pitch-Deck.pdf" target="_blank" rel="noreferrer">
                 Open pitch deck
               </a>
-              <a className="btn btn-secondary" href="#">
-                Download company profile
+              <a className="btn btn-secondary" href="/pitchdeck/VULNITEK-Investor-Pitch-Deck.pdf" download>
+                Download pitch deck PDF
               </a>
             </div>
           </article>
@@ -164,13 +212,46 @@ function App() {
           <p>
             For demos, strategic partnerships, investor communication, or enterprise consultations, contact our team.
           </p>
-          <div className="inline-actions">
-            <a className="btn btn-primary" href="mailto:info@leecognitek.com">
-              Contact LeeCognitek
-            </a>
-            <a className="btn btn-secondary" href="https://leecognitek.com/">
-              Visit current domain
-            </a>
+          <div className="contact-grid">
+            <article className="panel contact-panel">
+              <h3>Reach us directly</h3>
+              <p>Email: <a href="mailto:info@leecognitek.com">info@leecognitek.com</a></p>
+              <p>Phone: <a href="tel:+919010994629">+91 90109 94629</a></p>
+              <div className="inline-actions">
+                <a className="btn btn-secondary" href="/pitchdeck/VULNITEK-Investor-Pitch-Deck.pdf" target="_blank" rel="noreferrer">
+                  Investor deck
+                </a>
+              </div>
+            </article>
+            <form className="panel contact-panel form-panel" onSubmit={onSubmit}>
+              <h3>Contact form</h3>
+              <div className="form-row">
+                <input name="name" value={form.name} onChange={onFormChange} placeholder="Your name" required />
+                <input name="email" type="email" value={form.email} onChange={onFormChange} placeholder="Work email" required />
+              </div>
+              <div className="form-row">
+                <input name="phone" value={form.phone} onChange={onFormChange} placeholder="Phone number" />
+                <input name="company" value={form.company} onChange={onFormChange} placeholder="Company" />
+              </div>
+              <div className="form-row form-row-single">
+                <select name="interest" value={form.interest} onChange={onFormChange}>
+                  <option value="Vulnitek">Vulnitek</option>
+                  <option value="Mantrika">Mantrika</option>
+                  <option value="Lstat">Lstat</option>
+                  <option value="Services">Services</option>
+                  <option value="Investor discussion">Investor discussion</option>
+                </select>
+              </div>
+              <div className="form-row form-row-single">
+                <textarea name="message" value={form.message} onChange={onFormChange} placeholder="Tell us what you need" rows={4} required />
+              </div>
+              <div className="inline-actions">
+                <button className="btn btn-primary" type="submit" disabled={formBusy}>
+                  {formBusy ? "Submitting..." : "Submit inquiry"}
+                </button>
+              </div>
+              {formMsg ? <p className="form-msg">{formMsg}</p> : null}
+            </form>
           </div>
         </section>
       </main>
