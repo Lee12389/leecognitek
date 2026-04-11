@@ -156,6 +156,107 @@
   margin-top: 24px;
 }
 
+.hero-graphic {
+  position: relative;
+  margin-top: 24px;
+  min-height: 170px;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  border-radius: 14px;
+  background: radial-gradient(circle at 35% 20%, rgba(34, 197, 94, 0.18), rgba(14, 165, 233, 0.06) 55%, transparent 78%);
+  overflow: hidden;
+}
+
+.pulse-node {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(15, 23, 42, 0.2);
+  background: rgba(255, 255, 255, 0.92);
+  font-size: 0.82rem;
+  font-weight: 700;
+  animation: pulseNode 3s ease-in-out infinite;
+}
+
+.node-core {
+  left: 44%;
+  top: 66px;
+  background: linear-gradient(120deg, rgba(14, 165, 233, 0.2), rgba(34, 197, 94, 0.2));
+}
+
+.node-vulnitek {
+  left: 14%;
+  top: 26px;
+  animation-delay: 0.3s;
+}
+
+.node-mantrika {
+  right: 16%;
+  top: 24px;
+  animation-delay: 0.6s;
+}
+
+.node-lstat {
+  right: 24%;
+  bottom: 20px;
+  animation-delay: 0.9s;
+}
+
+.beam {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.75), transparent);
+  transform-origin: left center;
+  animation: beamFlow 2.8s ease-in-out infinite;
+}
+
+.beam-a {
+  left: 24%;
+  top: 50px;
+  width: 34%;
+  transform: rotate(14deg);
+}
+
+.beam-b {
+  left: 51%;
+  top: 54px;
+  width: 30%;
+  transform: rotate(-10deg);
+  animation-delay: 0.45s;
+}
+
+.beam-c {
+  left: 50%;
+  top: 95px;
+  width: 22%;
+  transform: rotate(18deg);
+  animation-delay: 0.8s;
+}
+
+@keyframes pulseNode {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.24);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 0 0 8px rgba(14, 165, 233, 0);
+  }
+}
+
+@keyframes beamFlow {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
 .btn {
   display: inline-block;
   padding: 11px 16px;
@@ -403,6 +504,30 @@
 
   .hero-metrics {
     grid-template-columns: 1fr;
+  }
+
+  .hero-graphic {
+    min-height: 210px;
+  }
+
+  .node-core {
+    left: 36%;
+    top: 86px;
+  }
+
+  .node-vulnitek {
+    left: 8%;
+    top: 26px;
+  }
+
+  .node-mantrika {
+    right: 6%;
+    top: 26px;
+  }
+
+  .node-lstat {
+    right: 16%;
+    bottom: 20px;
   }
 
   .form-row {

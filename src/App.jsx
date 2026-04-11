@@ -131,6 +131,15 @@ function App() {
               View investor section
             </a>
           </div>
+          <div className="hero-graphic" aria-hidden="true">
+            <div className="pulse-node node-core">LCT</div>
+            <div className="pulse-node node-vulnitek">Vulnitek</div>
+            <div className="pulse-node node-mantrika">Mantrika</div>
+            <div className="pulse-node node-lstat">Lstat</div>
+            <span className="beam beam-a" />
+            <span className="beam beam-b" />
+            <span className="beam beam-c" />
+          </div>
           <div className="hero-metrics">
             <article>
               <span>3</span>
@@ -185,8 +194,8 @@ function App() {
             <p className="kicker">Investor Materials</p>
             <h2>Investor-ready narrative and pipeline</h2>
             <p>
-              This section can host your pitch deck, one-page profile, traction snapshots, and roadmap milestones.
-              Replace the links below with your final investor documents.
+              We share investor pitch materials directly upon request. Please contact our team for the latest investor
+              deck, company profile, roadmap snapshots, and discussion scheduling.
             </p>
             <div className="inline-actions">
               <a className="btn btn-primary" href="#contact">
