@@ -1,10 +1,13 @@
 import "./App.css";
 import { useState } from "react";
 import brandLogo from "./assets/leecognitek-logo.jpg";
+import vulnitekLogo from "./assets/vulnitek-logo.png";
+import mantrikaLogo from "./assets/mantrika-logo.jpg";
 
 const products = [
   {
     name: "Vulnitek",
+    logo: vulnitekLogo,
     stage: "Pre-release (final testing + GTM)",
     summary:
       "Advanced SAST + DAST platform with agentic security reasoning, exploit-aware validation, and enterprise triage workflows.",
@@ -16,6 +19,7 @@ const products = [
   },
   {
     name: "Mantrika",
+    logo: mantrikaLogo,
     stage: "In progress",
     summary:
       "Intelligent RPA platform for adaptive workflow automation across operations, support, and internal enterprise processes.",
@@ -27,6 +31,7 @@ const products = [
   },
   {
     name: "Lstat",
+    logo: "",
     stage: "Strategic build partnership with Statdoc",
     summary:
       "Medical coding and statistical analytics automation tool focused on reducing manual effort and improving decision velocity.",
@@ -164,6 +169,13 @@ function App() {
           <div className="card-grid">
             {products.map((product) => (
               <article key={product.name} className="product-card">
+                <div className="product-head">
+                  {product.logo ? (
+                    <img src={product.logo} alt={`${product.name} logo`} className="product-logo" />
+                  ) : (
+                    <div className="product-logo product-logo-fallback">{product.name[0]}</div>
+                  )}
+                </div>
                 <div className="badge">{product.stage}</div>
                 <h3>{product.name}</h3>
                 <p>{product.summary}</p>
