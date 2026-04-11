@@ -189,6 +189,31 @@ function App() {
           </ul>
         </section>
 
+        <section className="section reveal" id="partners">
+          <div className="section-head">
+            <p className="kicker">Partnerships</p>
+            <h2>Strategic ecosystem and execution support</h2>
+          </div>
+          <div className="card-grid">
+            <article className="panel">
+              <div className="badge">Cloud Partner</div>
+              <h3>Microsoft</h3>
+              <p>
+                Partnered with Microsoft for cloud services. LeeCognitek received USD 5,000 in credits, which supported
+                our cloud infrastructure during the early growth phase.
+              </p>
+            </article>
+            <article className="panel">
+              <div className="badge">Domain Partner</div>
+              <h3>Statdoc</h3>
+              <p>
+                Strategic partnership for building Lstat, a medical coding and statistical analytics automation platform
+                for healthcare-driven enterprise workflows.
+              </p>
+            </article>
+          </div>
+        </section>
+
         <section className="section split reveal" id="investors">
           <article className="panel">
             <p className="kicker">Investor Materials</p>
