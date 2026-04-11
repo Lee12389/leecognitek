@@ -3,6 +3,7 @@ import { useState } from "react";
 import brandLogo from "./assets/leecognitek-logo.jpg";
 import vulnitekLogo from "./assets/vulnitek-logo.png";
 import mantrikaLogo from "./assets/mantrika-logo.jpg";
+import lstatLogo from "./assets/lstat-logo.jpg";
 
 const products = [
   {
@@ -31,7 +32,7 @@ const products = [
   },
   {
     name: "Lstat",
-    logo: "",
+    logo: lstatLogo,
     stage: "Strategic build partnership with Statdoc",
     summary:
       "Medical coding and statistical analytics automation tool focused on reducing manual effort and improving decision velocity.",
@@ -137,10 +138,18 @@ function App() {
             </a>
           </div>
           <div className="hero-graphic" aria-hidden="true">
-            <div className="pulse-node node-core">LeeCognitek</div>
-            <div className="pulse-node node-vulnitek">Vulnitek</div>
-            <div className="pulse-node node-mantrika">Mantrika</div>
-            <div className="pulse-node node-lstat">Lstat</div>
+            <div className="pulse-node node-core">
+              <img src={brandLogo} alt="" className="node-logo-image" />
+            </div>
+            <div className="pulse-node node-vulnitek">
+              <img src={vulnitekLogo} alt="" className="node-logo-image" />
+            </div>
+            <div className="pulse-node node-mantrika">
+              <img src={mantrikaLogo} alt="" className="node-logo-image" />
+            </div>
+            <div className="pulse-node node-lstat">
+              <img src={lstatLogo} alt="" className="node-logo-image" />
+            </div>
             <span className="beam beam-a" />
             <span className="beam beam-b" />
             <span className="beam beam-c" />
