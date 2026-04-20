@@ -1,5 +1,5 @@
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import brandLogo from "./assets/leecognitek-logo.jpg";
 import vulnitekLogo from "./assets/vulnitek-logo.png";
 import mantrikaLogo from "./assets/mantrika-logo.jpg";
@@ -51,6 +51,12 @@ const products = [
     ],
   },
 ];
+
+const productPageLinks = {
+  Vulnitek: "/vulnitek",
+  Mantrika: "/mantrika",
+  Lstat: "/lstat",
+};
 
 const services = [
   "AI product engineering and modernization",
@@ -259,7 +265,1062 @@ const vulnitekUiShots = [
   },
 ];
 
+const homeSeo = {
+  title: "LeeCognitek | AI Startup Security Tools, LLM Security Scans, BYO LLM",
+  description:
+    "LeeCognitek is an AI startup building security tools, LLM-based security scans, and Bring Your Own LLM (BYO LLM) enterprise solutions with Vulnitek, Mantrika, and Lstat.",
+  keywords:
+    "AI startup, security tools, LLM security scans, LLM based security scans, bring your own LLM, BYO LLM, AI cybersecurity, Vulnitek, LeeCognitek",
+  ogTitle: "LeeCognitek | AI Startup Security Tools, LLM Security Scans, BYO LLM",
+  ogDescription:
+    "AI startup platform for security tools, LLM-based security scans, and BYO LLM enterprise deployments.",
+  canonical: "https://leecognitek.com/",
+};
+
+const vulnitekSeo = {
+  title: "Vulnitek | Vulnerability Management, Patch Orchestration, and LLM Risk Prioritization",
+  description:
+    "Vulnitek is LeeCognitek's integrated vulnerability and patch management platform with unified SAST + DAST visibility, LLM-assisted prioritization, and enterprise remediation workflows.",
+  keywords:
+    "Vulnitek, vulnerability management, patch management, LLM vulnerability prioritization, application security platform, SAST DAST platform",
+  ogTitle: "Vulnitek | Integrated Vulnerability and Patch Management Platform",
+  ogDescription:
+    "Discover, prioritize, and remediate vulnerabilities with AI-assisted triage and enterprise patch orchestration in one platform.",
+  canonical: "https://leecognitek.com/vulnitek",
+};
+
+const vulnitekStats = [
+  { value: "24/7", label: "continuous vulnerability and patch posture monitoring" },
+  { value: "<5 min", label: "pilot onboarding path for your first application scope" },
+  { value: "1 platform", label: "unified SAST, DAST, patching, and remediation command center" },
+  { value: "100+", label: "policy automations and workflow guardrails for enterprise teams" },
+];
+
+const vulnitekCapabilities = [
+  {
+    title: "Unified Vulnerability + Patch Management",
+    text: "Track vulnerabilities, map risk, and orchestrate remediation with patch actions from one workspace.",
+  },
+  {
+    title: "LLM-Assisted Risk Prioritization",
+    text: "Use exploitability context and LLM-driven reasoning to rank what must be fixed first.",
+  },
+  {
+    title: "Developer-Centric Remediation Flow",
+    text: "Push actionable tickets and fix guidance directly into engineering workflows and security ops queues.",
+  },
+  {
+    title: "BYO LLM and Private Model Support",
+    text: "Bring your own hosted model with governance controls, traceability, and organization-level policy boundaries.",
+  },
+  {
+    title: "Compliance-Ready Reporting",
+    text: "Generate executive and auditor-friendly reports for posture trends, remediation velocity, and control adherence.",
+  },
+  {
+    title: "Enterprise Integrations",
+    text: "Connect SIEM, ticketing, CI/CD, and identity systems to operationalize secure-by-default delivery.",
+  },
+];
+
+const vulnitekWorkflow = [
+  {
+    phase: "Discover",
+    detail: "Map assets, endpoints, apps, and dependency surfaces across your environment.",
+  },
+  {
+    phase: "Assess",
+    detail: "Run static, dynamic, and contextual checks with policy-aware analysis.",
+  },
+  {
+    phase: "Prioritize",
+    detail: "Use exploitability scoring plus AI guidance to focus on highest-impact risk.",
+  },
+  {
+    phase: "Remediate",
+    detail: "Trigger patch and fix workflows with ownership, SLAs, and verification loops.",
+  },
+  {
+    phase: "Report",
+    detail: "Track closure, trend, and control coverage metrics for leadership and compliance teams.",
+  },
+];
+
+const vulnitekUseCases = [
+  "Application security modernization for product teams",
+  "Patch and vulnerability lifecycle orchestration for enterprise IT",
+  "LLM-based security triage for faster SOC and AppSec decisions",
+  "Audit-ready risk and remediation reporting across departments",
+];
+
+const vulnitekPlans = [
+  {
+    name: "Pilot",
+    focus: "Fast proof-of-value for one business unit",
+    points: ["Core vulnerability scanning", "Guided prioritization", "Security dashboard"],
+  },
+  {
+    name: "Growth",
+    focus: "Operational rollout across multiple teams",
+    points: ["Unified patch workflows", "Workflow integrations", "Advanced policy rules"],
+  },
+  {
+    name: "Enterprise",
+    focus: "Large-scale deployment with governance controls",
+    points: ["BYO LLM support", "Custom control frameworks", "Executive reporting and SLA orchestration"],
+  },
+];
+
+const mantrikaSeo = {
+  title: "Mantrika | Intelligent RPA Platform for Enterprise Workflow Automation",
+  description:
+    "Mantrika is LeeCognitek's intelligent RPA platform where users record steps with Windows Steps Recorder, LLM analyzes the flow, replays it, and automates enterprise workflows.",
+  keywords:
+    "Mantrika, intelligent RPA, enterprise automation platform, workflow automation, AI automation, human in loop RPA",
+  ogTitle: "Mantrika | Intelligent RPA for Enterprise Operations",
+  ogDescription:
+    "Automate high-volume enterprise workflows with intelligent orchestration, approvals, and audit-ready operations.",
+  canonical: "https://leecognitek.com/mantrika",
+};
+
+const mantrikaStats = [
+  { value: "24/7", label: "orchestrated automation across operations and support flows" },
+  { value: "Low-code", label: "workflow builder for business and engineering teams" },
+  { value: "Human-in-loop", label: "approval controls for sensitive and high-risk actions" },
+  { value: "API-first", label: "integration model for enterprise tools and internal systems" },
+];
+
+const mantrikaCapabilities = [
+  {
+    title: "Recorder-First Automation Capture",
+    text: "Capture real desktop workflows using Windows Steps Recorder and convert real operator behavior into automation-ready data.",
+  },
+  {
+    title: "LLM-Based Step Interpretation",
+    text: "LLM analyzes recorded actions, UI context, and process intent to create structured, replayable automation logic.",
+  },
+  {
+    title: "Reliable Action Replay",
+    text: "Replay captured flows in controlled execution runs, validate outcomes, and stabilize fragile automation paths.",
+  },
+  {
+    title: "Human-in-Loop Decision Controls",
+    text: "Escalate approvals and sensitive actions to users while maintaining traceability and governance confidence.",
+  },
+  {
+    title: "Enterprise Integrations",
+    text: "Connect ticketing, CRM, ERP, and internal APIs to operationalize automation across departments.",
+  },
+  {
+    title: "Audit and Observability",
+    text: "Track every recorded and automated step with run history, failure context, and SLA-level reporting.",
+  },
+];
+
+const mantrikaWorkflow = [
+  {
+    phase: "Record",
+    detail: "User records process steps with Windows Steps Recorder to capture real-world task execution.",
+  },
+  {
+    phase: "Analyze",
+    detail: "LLM interprets captured actions, screens, and intent to produce structured automation instructions.",
+  },
+  {
+    phase: "Replay",
+    detail: "Mantrika replays and validates flow execution to ensure repeatability and quality of outcomes.",
+  },
+  {
+    phase: "Automate",
+    detail: "Promote validated flows into production automation with exception handling and approval controls.",
+  },
+  {
+    phase: "Optimize",
+    detail: "Monitor performance, improve step logic, and continuously refine workflows for scale and reliability.",
+  },
+];
+
+const mantrikaUseCases = [
+  "Back-office task automation from manually recorded SOPs",
+  "Support and operations workflows with repetitive desktop actions",
+  "Finance and compliance processes requiring approval checkpoints",
+  "Cross-system enterprise workflows using recorder-driven automation capture",
+];
+
+const mantrikaPlans = [
+  {
+    name: "Starter",
+    focus: "Automate one or two high-volume internal workflows",
+    points: ["Workflow builder", "Core connectors", "Execution monitoring"],
+  },
+  {
+    name: "Operations",
+    focus: "Scale intelligent automation across multiple departments",
+    points: ["Advanced orchestration", "SLA controls", "Team-level governance"],
+  },
+  {
+    name: "Enterprise",
+    focus: "Organization-wide automation with strict compliance controls",
+    points: ["Custom integrations", "Policy enforcement", "Audit-ready reporting"],
+  },
+];
+
+const lstatSeo = {
+  title: "Lstat | Medical Coding and Statistical Analytics Automation Platform",
+  description:
+    "Lstat is LeeCognitek's healthcare coding and analytics automation platform, co-built with Statdoc, for enterprise medical coding, statistical reporting, and quality governance workflows.",
+  keywords:
+    "Lstat, medical coding automation, statistical analytics automation, healthcare analytics platform, clinical data workflows, healthcare AI operations",
+  ogTitle: "Lstat | Healthcare Coding and Statistical Analytics Automation",
+  ogDescription:
+    "Automate coding validation, statistical analytics, and healthcare reporting workflows with enterprise-grade controls and auditability.",
+  canonical: "https://leecognitek.com/lstat",
+};
+
+const lstatStats = [
+  { value: "5-layer flow", label: "project -> study -> delivery -> program -> element execution model" },
+  { value: "Role-based", label: "active-directory and access-level controls for governed operations" },
+  { value: "SAS-native", label: "generated code, controlled execution, and output/log review loop" },
+  { value: "Partner-led", label: "domain-informed build model with Statdoc healthcare collaboration" },
+];
+
+const lstatCapabilities = [
+  {
+    title: "Hierarchical Workflow Orchestration",
+    text: "Operate across project, study, delivery, program, and element layers with governed ownership and sequencing.",
+  },
+  {
+    title: "Program and Element Composition",
+    text: "Compose table/listing/figure programs and reusable elements with structured parameter management.",
+  },
+  {
+    title: "SAS Code Generation",
+    text: "Generate deterministic SAS code from element parameters for transparent review and controlled execution.",
+  },
+  {
+    title: "Execution and Log Visibility",
+    text: "Run element-level or program-level execution and inspect logs plus output datasets in one operating flow.",
+  },
+  {
+    title: "Access Governance",
+    text: "Apply admin, read, write, and execute access rules through Active Directory mapping and project access policies.",
+  },
+  {
+    title: "Clone and Scale Operations",
+    text: "Clone deliveries, programs, and elements to accelerate repeatable healthcare analytics delivery patterns.",
+  },
+];
+
+const lstatWorkflow = [
+  {
+    phase: "Govern",
+    detail: "Set up users, Active Directory groups, and scoped project/study access levels.",
+  },
+  {
+    phase: "Structure",
+    detail: "Create projects, studies, and deliveries with controlled folder and operational metadata.",
+  },
+  {
+    phase: "Compose",
+    detail: "Build programs and element sequences for tables, listings, and figures workflows.",
+  },
+  {
+    phase: "Generate",
+    detail: "Produce program and element SAS code directly from configured parameters.",
+  },
+  {
+    phase: "Execute",
+    detail: "Run at sequence checkpoints, inspect execution logs, and iterate quickly.",
+  },
+  {
+    phase: "Deliver",
+    detail: "Review outputs, track auditable changes, and clone structures for next delivery cycle.",
+  },
+];
+
+const lstatUseCases = [
+  "Clinical-statistical workflow standardization across project teams",
+  "Controlled SAS generation and execution for regulated analytics operations",
+  "Reusable delivery templates for recurring table/listing/figure production cycles",
+  "Governed collaboration between admin, analytics, and execution stakeholders",
+];
+
+const lstatPlans = [
+  {
+    name: "Foundation",
+    focus: "Launch core workflow governance and first delivery pipeline",
+    points: ["Access setup", "Program creation baseline", "Execution log visibility"],
+  },
+  {
+    name: "Operations",
+    focus: "Scale program/element automation across multiple studies",
+    points: ["Delivery cloning", "Element sequence control", "Cross-team workflow ownership"],
+  },
+  {
+    name: "Enterprise",
+    focus: "Enterprise-grade rollout with governance and repeatability",
+    points: ["Policy-driven access", "Audit-ready process trails", "Strategic domain collaboration"],
+  },
+];
+
+const productDemoLinks = {
+  vulnitek: "",
+  mantrika: "",
+  lstat: "",
+};
+
+function toEmbedUrl(url) {
+  if (!url || !url.trim()) return "";
+  try {
+    const parsed = new URL(url);
+    if (parsed.hostname.includes("youtube.com")) {
+      const videoId = parsed.searchParams.get("v");
+      if (videoId) return `https://www.youtube.com/embed/${videoId}`;
+    }
+    if (parsed.hostname.includes("youtu.be")) {
+      const videoId = parsed.pathname.replace("/", "").trim();
+      if (videoId) return `https://www.youtube.com/embed/${videoId}`;
+    }
+    if (parsed.hostname.includes("vimeo.com")) {
+      const videoId = parsed.pathname.replace("/", "").trim();
+      if (videoId) return `https://player.vimeo.com/video/${videoId}`;
+    }
+    return url;
+  } catch {
+    return "";
+  }
+}
+
+function DemoVideoSection({ id, title, description, url }) {
+  const embedUrl = toEmbedUrl(url);
+  if (!embedUrl) return null;
+
+  return (
+    <section className="section reveal" id={id}>
+      <div className="section-head">
+        <p className="kicker">Demo Video</p>
+        <h2>{title}</h2>
+      </div>
+      <div className="demo-video-panel">
+        <p>{description}</p>
+        <div className="demo-video-wrap">
+          <iframe
+            src={embedUrl}
+            title={title}
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function upsertMetaByName(name, content) {
+  if (typeof document === "undefined") return;
+  let tag = document.querySelector(`meta[name="${name}"]`);
+  if (!tag) {
+    tag = document.createElement("meta");
+    tag.setAttribute("name", name);
+    document.head.appendChild(tag);
+  }
+  tag.setAttribute("content", content);
+}
+
+function upsertMetaByProperty(property, content) {
+  if (typeof document === "undefined") return;
+  let tag = document.querySelector(`meta[property="${property}"]`);
+  if (!tag) {
+    tag = document.createElement("meta");
+    tag.setAttribute("property", property);
+    document.head.appendChild(tag);
+  }
+  tag.setAttribute("content", content);
+}
+
+function applySeoMeta(meta) {
+  if (typeof document === "undefined") return;
+  document.title = meta.title;
+  upsertMetaByName("description", meta.description);
+  upsertMetaByName("keywords", meta.keywords);
+  upsertMetaByProperty("og:title", meta.ogTitle);
+  upsertMetaByProperty("og:description", meta.ogDescription);
+  upsertMetaByProperty("og:url", meta.canonical);
+  upsertMetaByName("twitter:title", meta.ogTitle);
+  upsertMetaByName("twitter:description", meta.ogDescription);
+  upsertMetaByName("twitter:url", meta.canonical);
+  const canonicalTag = document.querySelector('link[rel="canonical"]');
+  if (canonicalTag) canonicalTag.setAttribute("href", meta.canonical);
+}
+
+function ShowcaseCarousel({ shots, productName = "Product", autoSlideMs = 2800, surfaceClassName = "" }) {
+  const [activeShot, setActiveShot] = useState(0);
+  const [carouselIndex, setCarouselIndex] = useState(0);
+  const [isCarouselTransition, setIsCarouselTransition] = useState(true);
+  const [isAutoPlay, setIsAutoPlay] = useState(true);
+  const normalizedShots = useMemo(() => (Array.isArray(shots) ? shots : []), [shots]);
+  const shotCount = normalizedShots.length;
+  const loopedUiShots = useMemo(
+    () => (shotCount ? [...normalizedShots, normalizedShots[0]] : []),
+    [normalizedShots, shotCount],
+  );
+  const safeActiveShot = shotCount ? activeShot % shotCount : 0;
+  const currentShot = normalizedShots[safeActiveShot] || normalizedShots[0];
+
+  useEffect(() => {
+    if (!isAutoPlay || shotCount <= 1) return undefined;
+    const timer = setInterval(() => {
+      setCarouselIndex((prev) => prev + 1);
+      setActiveShot((prev) => (prev + 1) % shotCount);
+    }, autoSlideMs);
+    return () => clearInterval(timer);
+  }, [isAutoPlay, shotCount, autoSlideMs]);
+
+  if (!normalizedShots.length) return null;
+
+  const onShowcaseTransitionEnd = () => {
+    if (carouselIndex !== shotCount) return;
+    setIsCarouselTransition(false);
+    setCarouselIndex(0);
+    if (typeof window !== "undefined") {
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => {
+          setIsCarouselTransition(true);
+        });
+      });
+      return;
+    }
+    setIsCarouselTransition(true);
+  };
+
+  const onShotSelect = (idx) => {
+    setActiveShot(idx);
+    setCarouselIndex(idx);
+    setIsCarouselTransition(true);
+    setIsAutoPlay(false);
+  };
+
+  return (
+    <div className={`showcase-surface${surfaceClassName ? ` ${surfaceClassName}` : ""}`}>
+      <div className="showcase-carousel" aria-label={`${productName} product interface gallery`}>
+        <div className="showcase-viewport">
+          <div
+            className="showcase-strip"
+            style={{
+              transform: `translateX(-${carouselIndex * 100}%)`,
+              transition: isCarouselTransition ? undefined : "none",
+            }}
+            onTransitionEnd={onShowcaseTransitionEnd}
+          >
+            {loopedUiShots.map((shot, idx) => (
+              <figure className="showcase-slide" key={`${shot.title}-${idx}`}>
+                <img
+                  className="showcase-main-image"
+                  src={shot.src}
+                  alt={`${shot.title} - ${shot.label}`}
+                  width={shot.width}
+                  height={shot.height}
+                  loading={idx < 2 ? "eager" : "lazy"}
+                  decoding="async"
+                />
+              </figure>
+            ))}
+          </div>
+        </div>
+
+        <div className="showcase-caption">
+          <div className="showcase-caption-head">
+            <span>{currentShot.label}</span>
+            <p className="showcase-progress" aria-live="polite">
+              {safeActiveShot + 1} / {shotCount}
+            </p>
+          </div>
+          <h3>{currentShot.title}</h3>
+          <p>{currentShot.detail}</p>
+        </div>
+
+        <div className="showcase-dots" role="tablist" aria-label={`${productName} UI slides`}>
+          {normalizedShots.map((shot, idx) => (
+            <button
+              key={shot.title}
+              type="button"
+              className={`showcase-dot${idx === safeActiveShot ? " is-active" : ""}`}
+              onClick={() => onShotSelect(idx)}
+              aria-label={`Show ${shot.title}`}
+              aria-current={idx === safeActiveShot ? "true" : "false"}
+            />
+          ))}
+        </div>
+
+        <div className="showcase-controls">
+          <button
+            type="button"
+            className="showcase-toggle"
+            onClick={() => setIsAutoPlay((prev) => !prev)}
+            aria-pressed={isAutoPlay ? "true" : "false"}
+          >
+            {isAutoPlay ? "Stop auto slide" : "Resume auto slide"}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function VulnitekPage() {
+  return (
+    <div className="page-shell vulnitek-shell">
+      <a className="skip-link" href="#v-main">
+        Skip to main content
+      </a>
+      <div className="bg-orb orb-a" />
+      <div className="bg-orb orb-b" />
+      <div className="bg-grid" />
+
+      <main className="site vulnitek-site" id="v-main">
+        <header className="topbar">
+          <a className="brand" href="/">
+            <img
+              src={brandLogo}
+              alt="LeeCognitek logo"
+              className="brand-logo"
+              width="36"
+              height="36"
+              decoding="async"
+              fetchPriority="high"
+            />
+            <span>LeeCognitek</span>
+          </a>
+          <nav className="topnav" aria-label="Vulnitek primary navigation">
+            <a href="#v-overview">Overview</a>
+            <a href="#v-capabilities">Capabilities</a>
+            <a href="#v-workflow">Workflow</a>
+            <a href="#v-tour">Product Tour</a>
+            <a href="#v-pricing">Plans</a>
+            <a href="#v-contact">Contact</a>
+          </nav>
+        </header>
+
+        <section className="v-hero reveal" id="v-overview">
+          <div className="v-hero-copy">
+            <p className="kicker">Vulnitek Platform</p>
+            <h1>Integrated vulnerability and patch management for modern security operations.</h1>
+            <p className="subheadline">
+              Vulnitek helps teams discover, prioritize, and remediate vulnerabilities with AI-assisted triage,
+              enterprise patch orchestration, and compliance-ready reporting in one operating layer.
+            </p>
+            <ul className="v-hero-bullets">
+              <li>Unified SAST + DAST + patch context</li>
+              <li>LLM-assisted exploitability reasoning and triage support</li>
+              <li>BYO LLM and policy-based enterprise governance</li>
+            </ul>
+            <div className="hero-actions">
+              <a className="btn btn-primary" href="#v-contact">
+                Request Vulnitek demo
+              </a>
+              <a className="btn btn-secondary" href="mailto:info@leecognitek.com?subject=Vulnitek%20Platform%20Inquiry">
+                Talk to security team
+              </a>
+            </div>
+          </div>
+
+          <aside className="v-hero-panel">
+            <p className="kicker">At a glance</p>
+            <div className="v-hero-metrics">
+              {vulnitekStats.slice(0, 3).map((item) => (
+                <article key={item.label}>
+                  <span>{item.value}</span>
+                  <p>{item.label}</p>
+                </article>
+              ))}
+            </div>
+          </aside>
+        </section>
+
+        <section className="section reveal" id="v-stats">
+          <div className="section-head">
+            <p className="kicker">Platform Metrics</p>
+            <h2>Numbers that support operational readiness</h2>
+          </div>
+          <div className="v-stats-grid">
+            {vulnitekStats.map((item) => (
+              <article className="v-stat-card" key={item.label}>
+                <h3>{item.value}</h3>
+                <p>{item.label}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="section reveal" id="v-capabilities">
+          <div className="section-head">
+            <p className="kicker">Core Capabilities</p>
+            <h2>Built for enterprise AppSec, SecOps, and IT remediation teams</h2>
+          </div>
+          <div className="card-grid">
+            {vulnitekCapabilities.map((item) => (
+              <article className="panel" key={item.title}>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="section reveal" id="v-workflow">
+          <div className="section-head">
+            <p className="kicker">Operational Flow</p>
+            <h2>From detection to validated remediation in one cycle</h2>
+          </div>
+          <div className="timeline v-workflow-grid">
+            {vulnitekWorkflow.map((step, idx) => (
+              <article className="timeline-item" key={step.phase}>
+                <div className="timeline-index">{idx + 1}</div>
+                <div>
+                  <h3>{step.phase}</h3>
+                  <p>{step.detail}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="section reveal" id="v-tour">
+          <div className="section-head">
+            <p className="kicker">Product Tour</p>
+            <h2>See Vulnitek in action across security workflows</h2>
+          </div>
+
+          <ShowcaseCarousel
+            shots={vulnitekUiShots}
+            productName="Vulnitek"
+          />
+        </section>
+
+        <DemoVideoSection
+          id="v-demo"
+          title="Vulnitek Platform Demo"
+          description="Walk through vulnerability discovery, prioritization, remediation workflows, and executive reporting in Vulnitek."
+          url={productDemoLinks.vulnitek}
+        />
+
+        <section className="section split reveal" id="v-pricing">
+          <article className="panel">
+            <p className="kicker">Use Cases</p>
+            <h2>Where Vulnitek delivers the most value</h2>
+            <ul className="bullets">
+              {vulnitekUseCases.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </article>
+
+          <article className="panel">
+            <p className="kicker">Engagement Plans</p>
+            <h2>Choose rollout speed that fits your team</h2>
+            <div className="v-plan-grid">
+              {vulnitekPlans.map((plan) => (
+                <article key={plan.name} className="v-plan-card">
+                  <h3>{plan.name}</h3>
+                  <p>{plan.focus}</p>
+                  <ul>
+                    {plan.points.map((point) => (
+                      <li key={point}>{point}</li>
+                    ))}
+                  </ul>
+                </article>
+              ))}
+            </div>
+          </article>
+        </section>
+
+        <section className="section cta reveal" id="v-contact">
+          <p className="kicker">Get Started</p>
+          <h2>Book a Vulnitek walkthrough for your security team</h2>
+          <p>
+            Share your current vulnerability and patch workflow. We&apos;ll map a practical rollout model with metrics,
+            governance, and integration planning.
+          </p>
+          <div className="inline-actions">
+            <a className="btn btn-primary" href="mailto:info@leecognitek.com?subject=Vulnitek%20Demo%20Request">
+              Request demo
+            </a>
+            <a className="btn btn-secondary" href="tel:+919010994629">
+              Call +91 90109 94629
+            </a>
+            <a className="btn btn-secondary" href="/">
+              Back to company site
+            </a>
+          </div>
+        </section>
+      </main>
+    </div>
+  );
+}
+
+function MantrikaPage() {
+  return (
+    <div className="page-shell mantrika-shell">
+      <a className="skip-link" href="#m-main">
+        Skip to main content
+      </a>
+      <div className="bg-orb orb-a" />
+      <div className="bg-orb orb-b" />
+      <div className="bg-grid" />
+
+      <main className="site vulnitek-site" id="m-main">
+        <header className="topbar">
+          <a className="brand" href="/">
+            <img
+              src={brandLogo}
+              alt="LeeCognitek logo"
+              className="brand-logo"
+              width="36"
+              height="36"
+              decoding="async"
+              fetchPriority="high"
+            />
+            <span>LeeCognitek</span>
+          </a>
+          <nav className="topnav" aria-label="Mantrika primary navigation">
+            <a href="#m-overview">Overview</a>
+            <a href="#m-capabilities">Capabilities</a>
+            <a href="#m-workflow">Workflow</a>
+            <a href="#m-pricing">Plans</a>
+            <a href="#m-contact">Contact</a>
+          </nav>
+        </header>
+
+        <section className="v-hero reveal" id="m-overview">
+          <div className="v-hero-copy">
+            <p className="kicker">Mantrika Platform</p>
+            <h1>Intelligent RPA that learns workflows from real user-recorded steps.</h1>
+            <p className="subheadline">
+              Mantrika captures process steps using Windows Steps Recorder, applies LLM analysis to understand intent,
+              replays flow execution, and automates enterprise operations with governed controls.
+            </p>
+            <ul className="v-hero-bullets">
+              <li>Record processes exactly as users perform them</li>
+              <li>LLM converts recorded actions into automation-ready logic</li>
+              <li>Replay and validate before promoting to production automation</li>
+            </ul>
+            <div className="hero-actions">
+              <a className="btn btn-primary" href="#m-contact">
+                Request Mantrika demo
+              </a>
+              <a className="btn btn-secondary" href="mailto:info@leecognitek.com?subject=Mantrika%20Platform%20Inquiry">
+                Talk to automation team
+              </a>
+            </div>
+          </div>
+
+          <aside className="v-hero-panel">
+            <p className="kicker">At a glance</p>
+            <div className="v-hero-metrics">
+              {mantrikaStats.slice(0, 3).map((item) => (
+                <article key={item.label}>
+                  <span>{item.value}</span>
+                  <p>{item.label}</p>
+                </article>
+              ))}
+            </div>
+          </aside>
+        </section>
+
+        <section className="section reveal" id="m-stats">
+          <div className="section-head">
+            <p className="kicker">Automation Metrics</p>
+            <h2>Built for practical, governed enterprise automation</h2>
+          </div>
+          <div className="v-stats-grid">
+            {mantrikaStats.map((item) => (
+              <article className="v-stat-card" key={item.label}>
+                <h3>{item.value}</h3>
+                <p>{item.label}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="section reveal" id="m-capabilities">
+          <div className="section-head">
+            <p className="kicker">Core Capabilities</p>
+            <h2>From recorder capture to intelligent enterprise automation</h2>
+          </div>
+          <div className="card-grid">
+            {mantrikaCapabilities.map((item) => (
+              <article className="panel" key={item.title}>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="section reveal" id="m-workflow">
+          <div className="section-head">
+            <p className="kicker">Automation Flow</p>
+            <h2>Record, analyze, replay, and automate with confidence</h2>
+          </div>
+          <div className="timeline v-workflow-grid">
+            {mantrikaWorkflow.map((step, idx) => (
+              <article className="timeline-item" key={step.phase}>
+                <div className="timeline-index">{idx + 1}</div>
+                <div>
+                  <h3>{step.phase}</h3>
+                  <p>{step.detail}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <DemoVideoSection
+          id="m-demo"
+          title="Mantrika Intelligent RPA Demo"
+          description="See recorder-first automation capture, LLM interpretation, replay validation, and production workflow orchestration in Mantrika."
+          url={productDemoLinks.mantrika}
+        />
+
+        <section className="section split reveal" id="m-pricing">
+          <article className="panel">
+            <p className="kicker">Use Cases</p>
+            <h2>Where Mantrika delivers fastest operational impact</h2>
+            <ul className="bullets">
+              {mantrikaUseCases.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </article>
+
+          <article className="panel">
+            <p className="kicker">Engagement Plans</p>
+            <h2>Scale automation by team maturity</h2>
+            <div className="v-plan-grid">
+              {mantrikaPlans.map((plan) => (
+                <article key={plan.name} className="v-plan-card">
+                  <h3>{plan.name}</h3>
+                  <p>{plan.focus}</p>
+                  <ul>
+                    {plan.points.map((point) => (
+                      <li key={point}>{point}</li>
+                    ))}
+                  </ul>
+                </article>
+              ))}
+            </div>
+          </article>
+        </section>
+
+        <section className="section cta reveal" id="m-contact">
+          <p className="kicker">Get Started</p>
+          <h2>Launch your first recorder-driven automation flow with Mantrika</h2>
+          <p>
+            Share one repetitive workflow from your team, and we&apos;ll map the recorder capture, LLM interpretation,
+            replay validation, and rollout approach.
+          </p>
+          <div className="inline-actions">
+            <a className="btn btn-primary" href="mailto:info@leecognitek.com?subject=Mantrika%20Demo%20Request">
+              Request demo
+            </a>
+            <a className="btn btn-secondary" href="tel:+919010994629">
+              Call +91 90109 94629
+            </a>
+            <a className="btn btn-secondary" href="/">
+              Back to company site
+            </a>
+          </div>
+        </section>
+      </main>
+    </div>
+  );
+}
+
+function LstatPage() {
+  return (
+    <div className="page-shell lstat-shell">
+      <a className="skip-link" href="#l-main">
+        Skip to main content
+      </a>
+      <div className="bg-orb orb-a" />
+      <div className="bg-orb orb-b" />
+      <div className="bg-grid" />
+
+      <main className="site vulnitek-site" id="l-main">
+        <header className="topbar">
+          <a className="brand" href="/">
+            <img
+              src={brandLogo}
+              alt="LeeCognitek logo"
+              className="brand-logo"
+              width="36"
+              height="36"
+              decoding="async"
+              fetchPriority="high"
+            />
+            <span>LeeCognitek</span>
+          </a>
+          <nav className="topnav" aria-label="Lstat primary navigation">
+            <a href="#l-overview">Overview</a>
+            <a href="#l-capabilities">Capabilities</a>
+            <a href="#l-workflow">Workflow</a>
+            <a href="#l-pricing">Plans</a>
+            <a href="#l-contact">Contact</a>
+          </nav>
+        </header>
+
+        <section className="v-hero reveal" id="l-overview">
+          <div className="v-hero-copy">
+            <p className="kicker">Lstat Platform</p>
+            <h1>Medical coding and statistical analytics automation for healthcare execution teams.</h1>
+            <p className="subheadline">
+              Lstat is a healthcare-focused platform co-built with Statdoc to automate coding workflows, improve data
+              quality, and generate reliable statistical insights for enterprise operations and governance.
+            </p>
+            <ul className="v-hero-bullets">
+              <li>Accelerate medical coding with AI-assisted suggestions and QA guardrails</li>
+              <li>Automate statistical analytics flows for operational and clinical reporting</li>
+              <li>Maintain traceable, audit-ready workflows across teams and partners</li>
+            </ul>
+            <div className="hero-actions">
+              <a className="btn btn-primary" href="#l-contact">
+                Request Lstat demo
+              </a>
+              <a className="btn btn-secondary" href="mailto:info@leecognitek.com?subject=Lstat%20Platform%20Inquiry">
+                Talk to healthcare team
+              </a>
+            </div>
+          </div>
+
+          <aside className="v-hero-panel">
+            <p className="kicker">At a glance</p>
+            <div className="v-hero-metrics">
+              {lstatStats.slice(0, 3).map((item) => (
+                <article key={item.label}>
+                  <span>{item.value}</span>
+                  <p>{item.label}</p>
+                </article>
+              ))}
+            </div>
+          </aside>
+        </section>
+
+        <section className="section reveal" id="l-stats">
+          <div className="section-head">
+            <p className="kicker">Platform Metrics</p>
+            <h2>Designed for reliable healthcare coding and analytics delivery</h2>
+          </div>
+          <div className="v-stats-grid">
+            {lstatStats.map((item) => (
+              <article className="v-stat-card" key={item.label}>
+                <h3>{item.value}</h3>
+                <p>{item.label}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="section reveal" id="l-capabilities">
+          <div className="section-head">
+            <p className="kicker">Core Capabilities</p>
+            <h2>Built for healthcare coding teams, analytics specialists, and governance leaders</h2>
+          </div>
+          <div className="card-grid">
+            {lstatCapabilities.map((item) => (
+              <article className="panel" key={item.title}>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="section reveal" id="l-workflow">
+          <div className="section-head">
+            <p className="kicker">Operational Flow</p>
+            <h2>From intake to validated reporting in one governed healthcare cycle</h2>
+          </div>
+          <div className="timeline v-workflow-grid">
+            {lstatWorkflow.map((step, idx) => (
+              <article className="timeline-item" key={step.phase}>
+                <div className="timeline-index">{idx + 1}</div>
+                <div>
+                  <h3>{step.phase}</h3>
+                  <p>{step.detail}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <DemoVideoSection
+          id="l-demo"
+          title="Lstat Healthcare Automation Demo"
+          description="Watch coding workflow capture, QA validation, and statistical reporting orchestration with Lstat."
+          url={productDemoLinks.lstat}
+        />
+
+        <section className="section split reveal" id="l-pricing">
+          <article className="panel">
+            <p className="kicker">Use Cases</p>
+            <h2>Where Lstat drives measurable healthcare execution value</h2>
+            <ul className="bullets">
+              {lstatUseCases.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </article>
+
+          <article className="panel">
+            <p className="kicker">Engagement Plans</p>
+            <h2>Adopt at the pace of your operations and governance model</h2>
+            <div className="v-plan-grid">
+              {lstatPlans.map((plan) => (
+                <article key={plan.name} className="v-plan-card">
+                  <h3>{plan.name}</h3>
+                  <p>{plan.focus}</p>
+                  <ul>
+                    {plan.points.map((point) => (
+                      <li key={point}>{point}</li>
+                    ))}
+                  </ul>
+                </article>
+              ))}
+            </div>
+          </article>
+        </section>
+
+        <section className="section cta reveal" id="l-contact">
+          <p className="kicker">Get Started</p>
+          <h2>Plan your Lstat rollout for coding and analytics modernization</h2>
+          <p>
+            Share your current coding and reporting process, and we&apos;ll map a practical deployment model with QA
+            checkpoints, governance controls, and integration pathways.
+          </p>
+          <div className="inline-actions">
+            <a className="btn btn-primary" href="mailto:info@leecognitek.com?subject=Lstat%20Demo%20Request">
+              Request demo
+            </a>
+            <a className="btn btn-secondary" href="tel:+919010994629">
+              Call +91 90109 94629
+            </a>
+            <a className="btn btn-secondary" href="/">
+              Back to company site
+            </a>
+          </div>
+        </section>
+      </main>
+    </div>
+  );
+}
+
 function App() {
+  const currentPath = typeof window !== "undefined" ? window.location.pathname.toLowerCase() : "/";
+  const isVulnitekPage = currentPath === "/vulnitek" || currentPath === "/vulnitek/";
+  const isMantrikaPage = currentPath === "/mantrika" || currentPath === "/mantrika/";
+  const isLstatPage = currentPath === "/lstat" || currentPath === "/lstat/";
+
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -271,16 +1332,22 @@ function App() {
   });
   const [formBusy, setFormBusy] = useState(false);
   const [formMsg, setFormMsg] = useState("");
-  const [activeShot, setActiveShot] = useState(0);
-  const [isAutoPlay, setIsAutoPlay] = useState(true);
 
   useEffect(() => {
-    if (!isAutoPlay) return undefined;
-    const timer = setInterval(() => {
-      setActiveShot((prev) => (prev + 1) % vulnitekUiShots.length);
-    }, 2800);
-    return () => clearInterval(timer);
-  }, [isAutoPlay]);
+    if (isVulnitekPage) {
+      applySeoMeta(vulnitekSeo);
+      return;
+    }
+    if (isMantrikaPage) {
+      applySeoMeta(mantrikaSeo);
+      return;
+    }
+    if (isLstatPage) {
+      applySeoMeta(lstatSeo);
+      return;
+    }
+    applySeoMeta(homeSeo);
+  }, [isVulnitekPage, isMantrikaPage, isLstatPage]);
 
   const onFormChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -319,6 +1386,18 @@ function App() {
     }
   };
 
+  if (isVulnitekPage) {
+    return <VulnitekPage />;
+  }
+
+  if (isMantrikaPage) {
+    return <MantrikaPage />;
+  }
+
+  if (isLstatPage) {
+    return <LstatPage />;
+  }
+
   return (
     <div className="page-shell">
       <a className="skip-link" href="#main-content">
@@ -343,7 +1422,9 @@ function App() {
           </a>
           <nav className="topnav" aria-label="Primary">
             <a href="#products">Products</a>
-            <a href="#showcase">Showcase</a>
+            <a href="/vulnitek">Vulnitek</a>
+            <a href="/mantrika">Mantrika</a>
+            <a href="/lstat">Lstat</a>
             <a href="#services">Services</a>
             <a href="#investors">Investors</a>
             <a href="#contact">Contact</a>
@@ -367,6 +1448,9 @@ function App() {
           <div className="hero-actions">
             <a className="btn btn-primary" href="#products">
               Explore products
+            </a>
+            <a className="btn btn-secondary" href="/vulnitek">
+              Open Vulnitek page
             </a>
             <a className="btn btn-secondary" href="#investors">
               View investor section
@@ -411,33 +1495,67 @@ function App() {
             <h2>Platforms under active build and launch</h2>
           </div>
           <div className="card-grid">
-            {products.map((product) => (
-              <article key={product.name} className="product-card">
-                <div className="product-head">
-                  {product.logo ? (
-                    <img
-                      src={product.logo}
-                      alt={`${product.name} logo`}
-                      className="product-logo"
-                      width="52"
-                      height="52"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  ) : (
-                    <div className="product-logo product-logo-fallback">{product.name[0]}</div>
-                  )}
-                </div>
-                <div className="badge">{product.stage}</div>
-                <h3>{product.name}</h3>
-                <p>{product.summary}</p>
-                <ul>
-                  {product.points.map((point) => (
-                    <li key={point}>{point}</li>
-                  ))}
-                </ul>
-              </article>
-            ))}
+            {products.map((product) => {
+              const productHref = productPageLinks[product.name];
+              return productHref ? (
+                <a
+                  key={product.name}
+                  className="product-card product-card-link"
+                  href={productHref}
+                  aria-label={`Open ${product.name} page`}
+                >
+                  <div className="product-head">
+                    {product.logo ? (
+                      <img
+                        src={product.logo}
+                        alt={`${product.name} logo`}
+                        className="product-logo"
+                        width="52"
+                        height="52"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    ) : (
+                      <div className="product-logo product-logo-fallback">{product.name[0]}</div>
+                    )}
+                  </div>
+                  <div className="badge">{product.stage}</div>
+                  <h3>{product.name}</h3>
+                  <p>{product.summary}</p>
+                  <ul>
+                    {product.points.map((point) => (
+                      <li key={point}>{point}</li>
+                    ))}
+                  </ul>
+                </a>
+              ) : (
+                <article key={product.name} className="product-card">
+                  <div className="product-head">
+                    {product.logo ? (
+                      <img
+                        src={product.logo}
+                        alt={`${product.name} logo`}
+                        className="product-logo"
+                        width="52"
+                        height="52"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    ) : (
+                      <div className="product-logo product-logo-fallback">{product.name[0]}</div>
+                    )}
+                  </div>
+                  <div className="badge">{product.stage}</div>
+                  <h3>{product.name}</h3>
+                  <p>{product.summary}</p>
+                  <ul>
+                    {product.points.map((point) => (
+                      <li key={point}>{point}</li>
+                    ))}
+                  </ul>
+                </article>
+              );
+            })}
           </div>
         </section>
 
@@ -447,63 +1565,10 @@ function App() {
             <h2>Live interface showcase with enterprise-ready product depth</h2>
           </div>
 
-          <div className="showcase-surface">
-            <div
-              className="showcase-carousel"
-              aria-label="Vulnitek product interface gallery"
-            >
-              <div className="showcase-viewport">
-                <div className="showcase-strip" style={{ transform: `translateX(-${activeShot * 100}%)` }}>
-                  {vulnitekUiShots.map((shot, idx) => (
-                    <figure className="showcase-slide" key={shot.title}>
-                      <img
-                        className="showcase-main-image"
-                        src={shot.src}
-                        alt={`${shot.title} - ${shot.label}`}
-                        width={shot.width}
-                        height={shot.height}
-                        loading={idx < 2 ? "eager" : "lazy"}
-                        decoding="async"
-                      />
-                    </figure>
-                  ))}
-                </div>
-              </div>
-
-              <div className="showcase-caption">
-                <span>{vulnitekUiShots[activeShot].label}</span>
-                <h3>{vulnitekUiShots[activeShot].title}</h3>
-                <p>{vulnitekUiShots[activeShot].detail}</p>
-              </div>
-
-              <div className="showcase-dots" role="tablist" aria-label="Vulnitek UI slides">
-                {vulnitekUiShots.map((shot, idx) => (
-                  <button
-                    key={shot.title}
-                    type="button"
-                    className={`showcase-dot${idx === activeShot ? " is-active" : ""}`}
-                    onClick={() => {
-                      setActiveShot(idx);
-                      setIsAutoPlay(false);
-                    }}
-                    aria-label={`Show ${shot.title}`}
-                    aria-current={idx === activeShot ? "true" : "false"}
-                  />
-                ))}
-              </div>
-
-              <div className="showcase-controls">
-                <button
-                  type="button"
-                  className="showcase-toggle"
-                  onClick={() => setIsAutoPlay((prev) => !prev)}
-                  aria-pressed={isAutoPlay ? "true" : "false"}
-                >
-                  {isAutoPlay ? "Stop auto slide" : "Resume auto slide"}
-                </button>
-              </div>
-            </div>
-          </div>
+          <ShowcaseCarousel
+            shots={vulnitekUiShots}
+            productName="Vulnitek"
+          />
         </section>
 
         <section className="section reveal" id="services">
