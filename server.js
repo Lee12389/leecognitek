@@ -15,50 +15,50 @@ const DEFAULT_ROBOTS = "index, follow, max-image-preview:large, max-snippet:-1, 
 
 const seoByPath = {
   "/": {
-    title: "LeeCognitek | AI Startup Security Tools, LLM Security Scans, BYO LLM",
+    title: "LeeCognitek | AI-Based Security Scanning, Application Security Scanning, BYOLLM",
     description:
-      "LeeCognitek is an AI startup building security tools, LLM-based security scans, and Bring Your Own LLM (BYO LLM) enterprise solutions with Vulnitek, Mantrika, and Lstat.",
+      "LeeCognitek is an applied AI startup helping enterprises adopt AI faster with secure products and automation. Vulnitek delivers AI-based security scanning for code, APIs, and modern apps with BYOLLM and managed hosting options.",
     keywords:
-      "AI startup, security tools, LLM security scans, LLM based security scans, bring your own LLM, BYO LLM, AI cybersecurity, Vulnitek, Mantrika, Lstat, LeeCognitek",
-    ogTitle: "LeeCognitek | AI Startup Security Tools, LLM Security Scans, BYO LLM",
+      "AI-based security scanning, application security scanning, AI security scanning, vulnerability scanning platform, SAST DAST, BYOLLM, LeeCognitek, Vulnitek",
+    ogTitle: "LeeCognitek | AI-Based Security Scanning and Applied AI Products",
     ogDescription:
-      "AI startup platform for security tools, LLM-based security scans, and BYO LLM enterprise deployments.",
+      "Applied AI startup helping enterprises adopt AI with security-first products, AI-based security scanning, and BYOLLM-ready deployment models.",
     canonical: `${SITE_URL}/`,
     robots: DEFAULT_ROBOTS,
   },
   "/vulnitek": {
-    title: "Vulnitek | Vulnerability Management, Patch Orchestration, and LLM Risk Prioritization",
+    title: "Vulnitek | AI-Based Security Scanning for Code, APIs, and Modern Apps",
     description:
-      "Vulnitek is LeeCognitek's integrated vulnerability and patch management platform with unified SAST + DAST visibility, LLM-assisted prioritization, and enterprise remediation workflows.",
+      "Vulnitek is LeeCognitek's AI-based security scanning platform with unified SAST and DAST, AI-assisted triage, a 30-day BYOLLM trial, and LeeCognitek-hosted options with usage-based LLM call pricing.",
     keywords:
-      "Vulnitek, vulnerability management, patch management, LLM vulnerability prioritization, application security platform, SAST DAST platform",
-    ogTitle: "Vulnitek | Integrated Vulnerability and Patch Management Platform",
+      "Vulnitek, AI-based security scanning, application security scanning, vulnerability scanning, SAST DAST platform, BYOLLM security platform",
+    ogTitle: "Vulnitek | AI-Based Security Scanning Platform",
     ogDescription:
-      "Discover, prioritize, and remediate vulnerabilities with AI-assisted triage and enterprise patch orchestration in one platform.",
+      "Scan, prioritize, and remediate vulnerabilities across apps and APIs with AI-assisted triage, BYOLLM flexibility, and managed deployment options.",
     canonical: `${SITE_URL}/vulnitek`,
     robots: DEFAULT_ROBOTS,
   },
   "/mantrika": {
-    title: "Mantrika | Intelligent RPA Platform for Enterprise Workflow Automation",
+    title: "Mantrika | Intelligent RPA Platform Under Development",
     description:
-      "Mantrika is LeeCognitek's intelligent RPA platform where users record steps with Windows Steps Recorder, LLM analyzes the flow, replays it, and automates enterprise workflows.",
+      "Mantrika is LeeCognitek's intelligent RPA platform under development, designed to turn recorder-based workflows into governed enterprise automation.",
     keywords:
       "Mantrika, intelligent RPA, enterprise automation platform, workflow automation, AI automation, human in loop RPA",
-    ogTitle: "Mantrika | Intelligent RPA for Enterprise Operations",
+    ogTitle: "Mantrika | Intelligent RPA Platform Under Development",
     ogDescription:
-      "Automate high-volume enterprise workflows with intelligent orchestration, approvals, and audit-ready operations.",
+      "Join the waitlist for LeeCognitek's recorder-first intelligent RPA platform for governed enterprise automation.",
     canonical: `${SITE_URL}/mantrika`,
     robots: DEFAULT_ROBOTS,
   },
   "/lstat": {
-    title: "Lstat | Medical Coding and Statistical Analytics Automation Platform",
+    title: "Lstat | Medical Coding and Analytics Platform Under Development",
     description:
-      "Lstat is LeeCognitek's healthcare coding and analytics automation platform, co-built with Statdoc, for enterprise medical coding, statistical reporting, and quality governance workflows.",
+      "Lstat is LeeCognitek's healthcare coding and analytics platform under development for governed medical coding, statistical reporting, and quality workflows.",
     keywords:
       "Lstat, medical coding automation, statistical analytics automation, healthcare analytics platform, clinical data workflows, healthcare AI operations",
-    ogTitle: "Lstat | Healthcare Coding and Statistical Analytics Automation",
+    ogTitle: "Lstat | Healthcare Coding Platform Under Development",
     ogDescription:
-      "Automate coding validation, statistical analytics, and healthcare reporting workflows with enterprise-grade controls and auditability.",
+      "Join the early-access conversation for LeeCognitek's healthcare coding and analytics platform under development.",
     canonical: `${SITE_URL}/lstat`,
     robots: DEFAULT_ROBOTS,
   },
@@ -68,21 +68,21 @@ const productSchemaByPath = {
   "/vulnitek": {
     name: "Vulnitek",
     description:
-      "Integrated vulnerability and patch management platform with unified static and dynamic analysis, prioritization, and remediation workflows.",
+      "AI-based security scanning platform with unified static and dynamic analysis, prioritization, remediation workflows, and flexible LLM deployment options.",
     applicationCategory: "SecurityApplication",
-    keywords: "vulnerability management, patch management, SAST, DAST, AI security triage",
+    keywords: "AI-based security scanning, application security scanning, SAST, DAST, AI security triage",
   },
   "/mantrika": {
     name: "Mantrika",
     description:
-      "Intelligent RPA platform where users record process steps, LLM analyzes intent, and workflows are replayed and automated at enterprise scale.",
+      "Recorder-first intelligent RPA platform under development where users record process steps, LLM analyzes intent, and workflows are replayed and automated at enterprise scale.",
     applicationCategory: "BusinessApplication",
     keywords: "intelligent RPA, workflow automation, recorder-first automation, enterprise operations",
   },
   "/lstat": {
     name: "Lstat",
     description:
-      "Healthcare coding and statistical analytics automation platform for governed operational and reporting workflows.",
+      "Healthcare coding and statistical analytics platform under development for governed operational and reporting workflows.",
     applicationCategory: "HealthApplication",
     keywords: "medical coding automation, healthcare analytics, statistical workflow automation",
   },
@@ -154,19 +154,18 @@ function buildStructuredData(pathname, seo) {
       "@id": organizationId,
       name: "LeeCognitek",
       url: `${SITE_URL}/`,
-      logo: `${SITE_URL}/og-image.jpg`,
+      logo: `${SITE_URL}/leecognitek-logo.jpg`,
       description:
-        "AI startup building security tools, LLM-based security scans, and Bring Your Own LLM enterprise solutions.",
+        "Applied AI startup helping enterprises adopt AI with secure products, automation systems, and AI-based security scanning.",
       knowsAbout: [
-        "AI startup products",
-        "Security tools",
-        "LLM security scans",
+        "Applied AI products",
+        "AI-based security scanning",
+        "Application security scanning",
         "Bring Your Own LLM",
         "Application security",
         "Enterprise automation",
       ],
       email: "info@leecognitek.com",
-      telephone: "+91 90109 94629",
     },
     {
       "@type": "WebSite",
@@ -329,6 +328,7 @@ async function sendLeadMail(lead) {
   const pass = process.env.SMTP_PASS || "";
   const from = process.env.CONTACT_FROM_EMAIL || user;
   const to = process.env.CONTACT_TO_EMAIL || "info@leecognitek.com";
+  const bcc = process.env.CONTACT_BCC_EMAIL || "kldprasad098@gmail.com";
 
   if (!host || !user || !pass || !from || !to) {
     return { mailed: false, reason: "SMTP not configured" };
@@ -345,10 +345,8 @@ async function sendLeadMail(lead) {
     "New lead from leecognitek.com",
     `Name: ${lead.name}`,
     `Email: ${lead.email}`,
-    `Phone: ${lead.phone || "-"}`,
     `Company: ${lead.company || "-"}`,
-    `Interest: ${lead.interest || "-"}`,
-    `Investor request: ${lead.investor_request ? "yes" : "no"}`,
+    `Interest: ${lead.interest || "General inquiry"}`,
     "",
     lead.message || "",
   ].join("\n");
@@ -356,7 +354,9 @@ async function sendLeadMail(lead) {
   await transporter.sendMail({
     from,
     to,
-    subject: `${lead.investor_request ? "[INVESTOR] " : ""}New website lead: ${lead.name}`,
+    bcc,
+    replyTo: lead.email,
+    subject: `New website request: ${lead.interest || lead.name}`,
     text,
   });
   return { mailed: true };
@@ -368,18 +368,12 @@ app.post("/api/contact", async (req, res) => {
     const lead = {
       name: String(body.name || "").trim(),
       email: String(body.email || "").trim(),
-      phone: String(body.phone || "").trim(),
       company: String(body.company || "").trim(),
-      interest: String(body.interest || "").trim(),
-      investor_request: Boolean(body.investorRequest),
+      interest: String(body.interest || "General inquiry").trim(),
       message: String(body.message || "").trim(),
       source: "website",
       received_at: new Date().toISOString(),
     };
-
-    if (lead.investor_request && !lead.interest) {
-      lead.interest = "Investor discussion";
-    }
 
     if (!lead.name || !lead.email || !lead.message) {
       return res.status(400).json({ ok: false, error: "Name, email, and message are required." });

@@ -17,37 +17,37 @@ const products = [
   {
     name: "Vulnitek",
     logo: vulnitekLogo,
-    stage: "Pre-release (final testing + GTM)",
+    stage: "Flagship product | 30-day BYOLLM trial",
     summary:
-      "Advanced SAST + DAST platform with agentic security reasoning, exploit-aware validation, and enterprise triage workflows.",
+      "AI-based security scanning platform for code, APIs, and modern apps with unified SAST, DAST, triage, and remediation workflows.",
     points: [
-      "Unified static + dynamic analysis in one security flow",
-      "Prioritized findings with remediation guidance and analyst context",
-      "Built for enterprise AppSec operations and governance",
+      "30-day BYOLLM evaluation for customer-managed models",
+      "LeeCognitek-hosted option with usage-based LLM call pricing",
+      "Built for AppSec teams, developer workflows, and security governance",
     ],
   },
   {
     name: "Mantrika",
     logo: mantrikaLogo,
-    stage: "In progress",
+    stage: "Under development",
     summary:
-      "Intelligent RPA platform for adaptive workflow automation across operations, support, and internal enterprise processes.",
+      "Recorder-first intelligent RPA platform for adaptive workflow automation across operations, support, and enterprise teams.",
     points: [
-      "AI-assisted workflow planning and execution",
-      "Automation with auditability and control",
-      "Designed for scale across departments",
+      "Windows Steps Recorder capture and AI workflow interpretation",
+      "Human-in-loop automation with audit-ready controls",
+      "Currently under development for early design partners",
     ],
   },
   {
     name: "Lstat",
     logo: lstatLogo,
-    stage: "Strategic build partnership with Statdoc",
+    stage: "Under development",
     summary:
-      "Medical coding and statistical analytics automation tool focused on reducing manual effort and improving decision velocity.",
+      "Medical coding and statistical analytics automation platform for healthcare teams seeking faster, governed delivery.",
     points: [
-      "Medical coding intelligence workflows",
-      "Statistical analytics automation for healthcare operations",
-      "Co-built with domain partners for practical deployment",
+      "Coding intelligence and statistical workflow orchestration",
+      "Healthcare QA, governance, and reporting support",
+      "Currently under development with domain partners",
     ],
   },
 ];
@@ -59,7 +59,7 @@ const productPageLinks = {
 };
 
 const services = [
-  "AI product engineering and modernization",
+  "AI adoption strategy, product engineering, and modernization",
   "Cybersecurity and application security consulting",
   "LLM-based security scans for code, APIs, and cloud workflows",
   "Bring Your Own LLM (BYO LLM) integration for enterprise security and automation",
@@ -70,9 +70,9 @@ const services = [
 ];
 
 const taglines = [
-  "Empower Your Business with LCT AI: Unleash the Power of Intelligent Automation.",
-  "Drive secure growth with AI-powered cybersecurity and enterprise execution.",
-  "Transform decisions into outcomes with LeeCognitek intelligence platforms.",
+  "Make AI adoption easier with secure, usable, enterprise-ready systems.",
+  "Launch AI programs with governance, delivery confidence, and measurable outcomes.",
+  "Move from experimentation to production with LeeCognitek applied intelligence.",
 ];
 
 const pillars = [
@@ -134,22 +134,22 @@ const faqs = [
   },
   {
     q: "How do you handle investor pitch material requests?",
-    a: "Investor materials are shared directly after a qualified request to protect IP while maintaining structured communication.",
+    a: "Investor materials are shared directly after a qualified request so we can provide the latest deck, roadmap, and discussion context.",
   },
 ];
 
 const aiSearchFocus = [
   {
-    title: "AI Startup Security Tools",
-    text: "We help AI startups launch faster with security-first tooling, secure architecture patterns, and practical AppSec workflows for modern product teams.",
+    title: "AI-Based Security Scanning",
+    text: "Vulnitek helps teams scan modern apps, APIs, and engineering workflows with AI-assisted reasoning, SAST, DAST, and remediation context in one place.",
   },
   {
-    title: "LLM-Based Security Scans",
-    text: "Our approach combines static and dynamic testing with LLM-assisted reasoning to improve vulnerability detection, triage quality, and remediation velocity.",
+    title: "Application Security Scanning",
+    text: "LeeCognitek brings together application security scanning, vulnerability validation, and governed remediation workflows for enterprise AppSec teams.",
   },
   {
-    title: "Bring Your Own LLM (BYO LLM)",
-    text: "Use your preferred or self-hosted LLM with governance controls, security guardrails, and enterprise-ready integration paths across your workflows.",
+    title: "BYOLLM and Managed LLM Delivery",
+    text: "Start with a 30-day BYOLLM evaluation or move to LeeCognitek-hosted execution when you want simpler operations with usage-based LLM call pricing.",
   },
 ];
 
@@ -266,33 +266,34 @@ const vulnitekUiShots = [
 ];
 
 const homeSeo = {
-  title: "LeeCognitek | AI Startup Security Tools, LLM Security Scans, BYO LLM",
+  title: "LeeCognitek | AI-Based Security Scanning, Application Security Scanning, BYOLLM",
   description:
-    "LeeCognitek is an AI startup building security tools, LLM-based security scans, and Bring Your Own LLM (BYO LLM) enterprise solutions with Vulnitek, Mantrika, and Lstat.",
+    "LeeCognitek is an applied AI startup helping enterprises adopt AI faster with secure products and automation. Vulnitek delivers AI-based security scanning for code, APIs, and modern apps with BYOLLM and managed hosting options.",
   keywords:
-    "AI startup, security tools, LLM security scans, LLM based security scans, bring your own LLM, BYO LLM, AI cybersecurity, Vulnitek, LeeCognitek",
-  ogTitle: "LeeCognitek | AI Startup Security Tools, LLM Security Scans, BYO LLM",
+    "AI-based security scanning, application security scanning, AI security scanning, vulnerability scanning platform, SAST DAST, BYOLLM, LeeCognitek, Vulnitek",
+  ogTitle: "LeeCognitek | AI-Based Security Scanning and Applied AI Products",
   ogDescription:
-    "AI startup platform for security tools, LLM-based security scans, and BYO LLM enterprise deployments.",
+    "Applied AI startup helping enterprises adopt AI with security-first products, AI-based security scanning, and BYOLLM-ready deployment models.",
   canonical: "https://leecognitek.com/",
 };
 
 const vulnitekSeo = {
-  title: "Vulnitek | Vulnerability Management, Patch Orchestration, and LLM Risk Prioritization",
+  title: "Vulnitek | AI-Based Security Scanning for Code, APIs, and Modern Apps",
   description:
-    "Vulnitek is LeeCognitek's integrated vulnerability and patch management platform with unified SAST + DAST visibility, LLM-assisted prioritization, and enterprise remediation workflows.",
+    "Vulnitek is LeeCognitek's AI-based security scanning platform with unified SAST and DAST, AI-assisted triage, a 30-day BYOLLM trial, and LeeCognitek-hosted options with usage-based LLM call pricing.",
   keywords:
-    "Vulnitek, vulnerability management, patch management, LLM vulnerability prioritization, application security platform, SAST DAST platform",
-  ogTitle: "Vulnitek | Integrated Vulnerability and Patch Management Platform",
+    "Vulnitek, AI-based security scanning, application security scanning, SAST DAST platform, vulnerability scanning, BYOLLM security platform",
+  ogTitle: "Vulnitek | AI-Based Security Scanning Platform",
   ogDescription:
-    "Discover, prioritize, and remediate vulnerabilities with AI-assisted triage and enterprise patch orchestration in one platform.",
+    "Scan, prioritize, and remediate vulnerabilities across apps and APIs with AI-assisted triage, BYOLLM flexibility, and managed deployment options.",
   canonical: "https://leecognitek.com/vulnitek",
 };
 
 const vulnitekStats = [
-  { value: "24/7", label: "continuous vulnerability and patch posture monitoring" },
-  { value: "<5 min", label: "pilot onboarding path for your first application scope" },
+  { value: "30 days", label: "BYOLLM evaluation window for customer-managed models" },
+  { value: "Usage-based", label: "LLM call pricing on LeeCognitek-hosted model option" },
   { value: "1 platform", label: "unified SAST, DAST, patching, and remediation command center" },
+  { value: "24/7", label: "continuous vulnerability and patch posture monitoring" },
   { value: "100+", label: "policy automations and workflow guardrails for enterprise teams" },
 ];
 
@@ -310,8 +311,8 @@ const vulnitekCapabilities = [
     text: "Push actionable tickets and fix guidance directly into engineering workflows and security ops queues.",
   },
   {
-    title: "BYO LLM and Private Model Support",
-    text: "Bring your own hosted model with governance controls, traceability, and organization-level policy boundaries.",
+    title: "Flexible LLM Deployment Options",
+    text: "Start with a 30-day BYOLLM evaluation or switch to LeeCognitek-hosted execution with usage-based LLM call pricing and governed operations.",
   },
   {
     title: "Compliance-Ready Reporting",
@@ -356,13 +357,13 @@ const vulnitekUseCases = [
 const vulnitekPlans = [
   {
     name: "Pilot",
-    focus: "Fast proof-of-value for one business unit",
-    points: ["Core vulnerability scanning", "Guided prioritization", "Security dashboard"],
+    focus: "30-day BYOLLM proof-of-value for one business unit",
+    points: ["30-day BYOLLM evaluation", "Core AI-based security scanning", "Guided prioritization and dashboard"],
   },
   {
     name: "Growth",
     focus: "Operational rollout across multiple teams",
-    points: ["Unified patch workflows", "Workflow integrations", "Advanced policy rules"],
+    points: ["LeeCognitek-hosted model option", "Usage-based LLM call pricing", "Workflow integrations and advanced policy rules"],
   },
   {
     name: "Enterprise",
@@ -372,14 +373,14 @@ const vulnitekPlans = [
 ];
 
 const mantrikaSeo = {
-  title: "Mantrika | Intelligent RPA Platform for Enterprise Workflow Automation",
+  title: "Mantrika | Intelligent RPA Platform Under Development",
   description:
-    "Mantrika is LeeCognitek's intelligent RPA platform where users record steps with Windows Steps Recorder, LLM analyzes the flow, replays it, and automates enterprise workflows.",
+    "Mantrika is LeeCognitek's intelligent RPA platform under development, designed to turn recorder-based workflows into governed enterprise automation.",
   keywords:
     "Mantrika, intelligent RPA, enterprise automation platform, workflow automation, AI automation, human in loop RPA",
-  ogTitle: "Mantrika | Intelligent RPA for Enterprise Operations",
+  ogTitle: "Mantrika | Intelligent RPA Platform Under Development",
   ogDescription:
-    "Automate high-volume enterprise workflows with intelligent orchestration, approvals, and audit-ready operations.",
+    "Join the waitlist for LeeCognitek's recorder-first intelligent RPA platform for governed enterprise automation.",
   canonical: "https://leecognitek.com/mantrika",
 };
 
@@ -466,14 +467,14 @@ const mantrikaPlans = [
 ];
 
 const lstatSeo = {
-  title: "Lstat | Medical Coding and Statistical Analytics Automation Platform",
+  title: "Lstat | Medical Coding and Analytics Platform Under Development",
   description:
-    "Lstat is LeeCognitek's healthcare coding and analytics automation platform, co-built with Statdoc, for enterprise medical coding, statistical reporting, and quality governance workflows.",
+    "Lstat is LeeCognitek's healthcare coding and analytics platform under development for governed medical coding, statistical reporting, and quality workflows.",
   keywords:
     "Lstat, medical coding automation, statistical analytics automation, healthcare analytics platform, clinical data workflows, healthcare AI operations",
-  ogTitle: "Lstat | Healthcare Coding and Statistical Analytics Automation",
+  ogTitle: "Lstat | Healthcare Coding Platform Under Development",
   ogDescription:
-    "Automate coding validation, statistical analytics, and healthcare reporting workflows with enterprise-grade controls and auditability.",
+    "Join the early-access conversation for LeeCognitek's healthcare coding and analytics platform under development.",
   canonical: "https://leecognitek.com/lstat",
 };
 
@@ -805,15 +806,16 @@ function VulnitekPage() {
         <section className="v-hero reveal" id="v-overview">
           <div className="v-hero-copy">
             <p className="kicker">Vulnitek Platform</p>
-            <h1>Integrated vulnerability and patch management for modern security operations.</h1>
+            <h1>AI-based security scanning for modern apps, APIs, and enterprise delivery teams.</h1>
             <p className="subheadline">
-              Vulnitek helps teams discover, prioritize, and remediate vulnerabilities with AI-assisted triage,
-              enterprise patch orchestration, and compliance-ready reporting in one operating layer.
+              Vulnitek helps teams discover, prioritize, and remediate vulnerabilities with unified SAST and DAST,
+              AI-assisted triage, a 30-day BYOLLM trial, and LeeCognitek-hosted deployment options with usage-based
+              LLM call pricing.
             </p>
             <ul className="v-hero-bullets">
-              <li>Unified SAST + DAST + patch context</li>
-              <li>LLM-assisted exploitability reasoning and triage support</li>
-              <li>BYO LLM and policy-based enterprise governance</li>
+              <li>Unified SAST + DAST + remediation context</li>
+              <li>30-day BYOLLM evaluation for customer-managed models</li>
+              <li>LeeCognitek-hosted option with usage-based LLM call pricing</li>
             </ul>
             <div className="hero-actions">
               <a className="btn btn-primary" href="#v-contact">
@@ -937,17 +939,14 @@ function VulnitekPage() {
 
         <section className="section cta reveal" id="v-contact">
           <p className="kicker">Get Started</p>
-          <h2>Book a Vulnitek walkthrough for your security team</h2>
+          <h2>Start a Vulnitek evaluation for your security team</h2>
           <p>
-            Share your current vulnerability and patch workflow. We&apos;ll map a practical rollout model with metrics,
-            governance, and integration planning.
+            Share your current application security workflow and we&apos;ll map the right path, whether that is a
+            30-day BYOLLM evaluation or a LeeCognitek-hosted rollout with managed operations.
           </p>
           <div className="inline-actions">
             <a className="btn btn-primary" href="mailto:info@leecognitek.com?subject=Vulnitek%20Demo%20Request">
               Request demo
-            </a>
-            <a className="btn btn-secondary" href="tel:+919010994629">
-              Call +91 90109 94629
             </a>
             <a className="btn btn-secondary" href="/">
               Back to company site
@@ -994,11 +993,12 @@ function MantrikaPage() {
 
         <section className="v-hero reveal" id="m-overview">
           <div className="v-hero-copy">
-            <p className="kicker">Mantrika Platform</p>
+            <p className="kicker">Mantrika | Under Development</p>
             <h1>Intelligent RPA that learns workflows from real user-recorded steps.</h1>
             <p className="subheadline">
-              Mantrika captures process steps using Windows Steps Recorder, applies LLM analysis to understand intent,
-              replays flow execution, and automates enterprise operations with governed controls.
+              Mantrika is under development as a recorder-first intelligent RPA platform. It captures process steps
+              using Windows Steps Recorder, applies LLM analysis to understand intent, and turns validated flow logic
+              into governed enterprise automation.
             </p>
             <ul className="v-hero-bullets">
               <li>Record processes exactly as users perform them</li>
@@ -1007,7 +1007,7 @@ function MantrikaPage() {
             </ul>
             <div className="hero-actions">
               <a className="btn btn-primary" href="#m-contact">
-                Request Mantrika demo
+                Join Mantrika waitlist
               </a>
               <a className="btn btn-secondary" href="mailto:info@leecognitek.com?subject=Mantrika%20Platform%20Inquiry">
                 Talk to automation team
@@ -1114,18 +1114,15 @@ function MantrikaPage() {
         </section>
 
         <section className="section cta reveal" id="m-contact">
-          <p className="kicker">Get Started</p>
-          <h2>Launch your first recorder-driven automation flow with Mantrika</h2>
+          <p className="kicker">Under Development</p>
+          <h2>Join the Mantrika design-partner waitlist</h2>
           <p>
-            Share one repetitive workflow from your team, and we&apos;ll map the recorder capture, LLM interpretation,
-            replay validation, and rollout approach.
+            Share one repetitive workflow from your team and we&apos;ll discuss early-access fit, design-partner
+            conversations, and the recorder-first rollout approach we&apos;re building.
           </p>
           <div className="inline-actions">
-            <a className="btn btn-primary" href="mailto:info@leecognitek.com?subject=Mantrika%20Demo%20Request">
-              Request demo
-            </a>
-            <a className="btn btn-secondary" href="tel:+919010994629">
-              Call +91 90109 94629
+            <a className="btn btn-primary" href="mailto:info@leecognitek.com?subject=Mantrika%20Early%20Access%20Request">
+              Request early access
             </a>
             <a className="btn btn-secondary" href="/">
               Back to company site
@@ -1172,10 +1169,10 @@ function LstatPage() {
 
         <section className="v-hero reveal" id="l-overview">
           <div className="v-hero-copy">
-            <p className="kicker">Lstat Platform</p>
+            <p className="kicker">Lstat | Under Development</p>
             <h1>Medical coding and statistical analytics automation for healthcare execution teams.</h1>
             <p className="subheadline">
-              Lstat is a healthcare-focused platform co-built with Statdoc to automate coding workflows, improve data
+              Lstat is under development as a healthcare-focused platform to automate coding workflows, improve data
               quality, and generate reliable statistical insights for enterprise operations and governance.
             </p>
             <ul className="v-hero-bullets">
@@ -1185,7 +1182,7 @@ function LstatPage() {
             </ul>
             <div className="hero-actions">
               <a className="btn btn-primary" href="#l-contact">
-                Request Lstat demo
+                Join Lstat waitlist
               </a>
               <a className="btn btn-secondary" href="mailto:info@leecognitek.com?subject=Lstat%20Platform%20Inquiry">
                 Talk to healthcare team
@@ -1292,18 +1289,15 @@ function LstatPage() {
         </section>
 
         <section className="section cta reveal" id="l-contact">
-          <p className="kicker">Get Started</p>
-          <h2>Plan your Lstat rollout for coding and analytics modernization</h2>
+          <p className="kicker">Under Development</p>
+          <h2>Join the Lstat early-access conversation</h2>
           <p>
-            Share your current coding and reporting process, and we&apos;ll map a practical deployment model with QA
-            checkpoints, governance controls, and integration pathways.
+            Share your current coding and reporting process, and we&apos;ll discuss fit for early access, healthcare
+            workflow priorities, and the governance model we&apos;re building with domain partners.
           </p>
           <div className="inline-actions">
-            <a className="btn btn-primary" href="mailto:info@leecognitek.com?subject=Lstat%20Demo%20Request">
-              Request demo
-            </a>
-            <a className="btn btn-secondary" href="tel:+919010994629">
-              Call +91 90109 94629
+            <a className="btn btn-primary" href="mailto:info@leecognitek.com?subject=Lstat%20Early%20Access%20Request">
+              Request early access
             </a>
             <a className="btn btn-secondary" href="/">
               Back to company site
@@ -1324,10 +1318,8 @@ function App() {
   const [form, setForm] = useState({
     name: "",
     email: "",
-    phone: "",
     company: "",
     interest: "Vulnitek",
-    investorRequest: false,
     message: "",
   });
   const [formBusy, setFormBusy] = useState(false);
@@ -1350,8 +1342,8 @@ function App() {
   }, [isVulnitekPage, isMantrikaPage, isLstatPage]);
 
   const onFormChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setForm((prev) => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
   };
 
   const onSubmit = async (e) => {
@@ -1372,10 +1364,8 @@ function App() {
       setForm({
         name: "",
         email: "",
-        phone: "",
         company: "",
         interest: "Vulnitek",
-        investorRequest: false,
         message: "",
       });
     } catch (err) {
@@ -1432,11 +1422,12 @@ function App() {
         </header>
 
         <section className="hero reveal" id="home">
-          <p className="kicker">AI Systems. Security. Automation.</p>
-          <h1>We build intelligent software products for high-stakes enterprise execution.</h1>
+          <p className="kicker">Applied AI Startup</p>
+          <h1>LeeCognitek helps teams adopt AI faster with secure, usable, enterprise-ready systems.</h1>
           <p className="subheadline">
-            LeeCognitek is an AI company focused on applied intelligence across cybersecurity, automation, and analytics.
-            Our flagship stack includes Vulnitek, Mantrika, and Lstat with partner-led domain depth.
+            LeeCognitek builds practical AI products, security platforms, and automation workflows that make AI
+            adoption easier for real teams. Vulnitek is our flagship platform for AI-based security scanning, while
+            Mantrika and Lstat remain under development.
           </p>
           <div className="tagline-list" aria-label="Brand taglines">
             {taglines.map((tagline) => (
@@ -1446,11 +1437,11 @@ function App() {
             ))}
           </div>
           <div className="hero-actions">
-            <a className="btn btn-primary" href="#products">
-              Explore products
+            <a className="btn btn-primary" href="/vulnitek">
+              Explore Vulnitek
             </a>
-            <a className="btn btn-secondary" href="/vulnitek">
-              Open Vulnitek page
+            <a className="btn btn-secondary" href="#products">
+              View portfolio
             </a>
             <a className="btn btn-secondary" href="#investors">
               View investor section
@@ -1475,12 +1466,12 @@ function App() {
           </div>
           <div className="hero-metrics">
             <article>
-              <span>3</span>
-              <p>Core product lines</p>
+              <span>1</span>
+              <p>Flagship product ready for conversations now</p>
             </article>
             <article>
-              <span>1</span>
-              <p>Strategic healthcare partnership</p>
+              <span>2</span>
+              <p>Roadmap products under development</p>
             </article>
             <article>
               <span>AI-first</span>
@@ -1492,7 +1483,7 @@ function App() {
         <section className="section reveal" id="products">
           <div className="section-head">
             <p className="kicker">Product Portfolio</p>
-            <h2>Platforms under active build and launch</h2>
+            <h2>Flagship platform with two roadmap products in development</h2>
           </div>
           <div className="card-grid">
             {products.map((product) => {
@@ -1586,7 +1577,7 @@ function App() {
         <section className="section reveal" id="ai-security">
           <div className="section-head">
             <p className="kicker">AI Security Focus</p>
-            <h2>AI startup security tools, LLM security scans, and BYO LLM delivery</h2>
+            <h2>AI-based security scanning, application security scanning, and flexible LLM delivery</h2>
           </div>
           <div className="card-grid">
             {aiSearchFocus.map((item) => (
@@ -1736,8 +1727,8 @@ function App() {
             <p className="kicker">Investor Materials</p>
             <h2>Investor-ready narrative and pipeline</h2>
             <p>
-              We share investor pitch materials directly upon request. Please contact our team for the latest investor
-              deck, company profile, roadmap snapshots, and discussion scheduling.
+              We share investor pitch materials directly upon request. Contact us if you&apos;re interested in
+              investment, strategic collaboration, or reviewing the latest company deck and roadmap.
             </p>
             <div className="inline-actions">
               <a className="btn btn-primary" href="#contact">
@@ -1753,9 +1744,9 @@ function App() {
             <p className="kicker">Current Focus</p>
             <h2>Execution roadmap</h2>
             <ul className="bullets">
-              <li>Vulnitek launch after final validation and GTM readiness</li>
-              <li>Mantrika feature expansion for intelligent enterprise RPA</li>
-              <li>Lstat co-development with Statdoc for healthcare workflows</li>
+              <li>Vulnitek customer pilots, evaluations, and flagship product rollout</li>
+              <li>Mantrika under development for recorder-first intelligent RPA</li>
+              <li>Lstat under development for healthcare coding and analytics workflows</li>
               <li>Scalable delivery model for enterprise transformation services</li>
             </ul>
           </article>
@@ -1777,16 +1768,17 @@ function App() {
         </section>
 
         <section className="section cta reveal" id="contact">
-          <p className="kicker">Let&apos;s build together</p>
-          <h2>Partnerships, pilots, and enterprise deployments</h2>
+          <p className="kicker">Contact LeeCognitek</p>
+          <h2>Share your request</h2>
           <p>
-            For demos, strategic partnerships, investor communication, or enterprise consultations, contact our team.
+            For product pilots, partnerships, investor conversations, or enterprise consultations, send a short note
+            and we&apos;ll route it to the right team.
           </p>
           <div className="contact-grid">
             <article className="panel contact-panel">
               <h3>Reach us directly</h3>
               <p>Email: <a href="mailto:info@leecognitek.com">info@leecognitek.com</a></p>
-              <p>Phone: <a href="tel:+919010994629">+91 90109 94629</a></p>
+              <p>All inbound requests are reviewed by the LeeCognitek core team.</p>
               <div className="inline-actions">
                 <a className="btn btn-secondary" href="mailto:info@leecognitek.com?subject=Investor%20Presentation%20Request">
                   Request investor presentation
@@ -1794,7 +1786,7 @@ function App() {
               </div>
             </article>
             <form className="panel contact-panel form-panel" onSubmit={onSubmit}>
-              <h3>Contact form</h3>
+              <h3>Send a request</h3>
               <div className="form-row">
                 <input
                   name="name"
@@ -1818,14 +1810,6 @@ function App() {
               </div>
               <div className="form-row">
                 <input
-                  name="phone"
-                  value={form.phone}
-                  onChange={onFormChange}
-                  placeholder="Phone number"
-                  autoComplete="tel"
-                  aria-label="Phone number"
-                />
-                <input
                   name="company"
                   value={form.company}
                   onChange={onFormChange}
@@ -1833,26 +1817,14 @@ function App() {
                   autoComplete="organization"
                   aria-label="Company"
                 />
-              </div>
-              <div className="form-row form-row-single">
                 <select name="interest" value={form.interest} onChange={onFormChange} aria-label="Interest">
                   <option value="Vulnitek">Vulnitek</option>
                   <option value="Mantrika">Mantrika</option>
                   <option value="Lstat">Lstat</option>
                   <option value="Services">Services</option>
                   <option value="Investor discussion">Investor discussion</option>
+                  <option value="General inquiry">General inquiry</option>
                 </select>
-              </div>
-              <div className="form-row form-row-single">
-                <label className="checkbox-row">
-                  <input
-                    type="checkbox"
-                    name="investorRequest"
-                    checked={form.investorRequest}
-                    onChange={onFormChange}
-                  />
-                  <span>This is an investor presentation request</span>
-                </label>
               </div>
               <div className="form-row form-row-single">
                 <textarea
@@ -1867,7 +1839,7 @@ function App() {
               </div>
               <div className="inline-actions">
                 <button className="btn btn-primary" type="submit" disabled={formBusy}>
-                  {formBusy ? "Submitting..." : "Submit inquiry"}
+                  {formBusy ? "Sending..." : "Send request"}
                 </button>
               </div>
               {formMsg ? <p className="form-msg">{formMsg}</p> : null}

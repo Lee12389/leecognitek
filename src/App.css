@@ -115,12 +115,14 @@
 }
 
 .brand-logo {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  object-fit: cover;
-  border: 1px solid rgba(15, 23, 42, 0.12);
-  background: #fff;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  object-fit: contain;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: rgba(255, 255, 255, 0.96);
+  padding: 2px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.75);
 }
 
 .topnav {
@@ -1078,19 +1080,6 @@
 
 .form-row-single {
   grid-template-columns: 1fr;
-}
-
-.checkbox-row {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.95rem;
-  color: var(--text);
-}
-
-.checkbox-row input[type="checkbox"] {
-  width: 16px;
-  height: 16px;
 }
 
 .form-msg {
