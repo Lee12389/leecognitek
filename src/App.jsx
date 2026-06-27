@@ -12,6 +12,15 @@ import vulnitekUi5 from "./assets/vulnitek-ui/5.jpg";
 import vulnitekUi6 from "./assets/vulnitek-ui/6.jpg";
 import vulnitekUi7 from "./assets/vulnitek-ui/7.jpg";
 import vulnitekUi8 from "./assets/vulnitek-ui/8.jpg";
+import {
+  PRODUCT_ROUTES,
+  ROUTES,
+  apiPath,
+  appPath,
+  getAppPathname,
+  isAppRoute,
+  siteUrl,
+} from "./site";
 
 const products = [
   {
@@ -51,12 +60,6 @@ const products = [
     ],
   },
 ];
-
-const productPageLinks = {
-  Vulnitek: "/vulnitek",
-  Mantrika: "/mantrika",
-  Lstat: "/lstat",
-};
 
 const services = [
   "AI product engineering and modernization",
@@ -274,7 +277,7 @@ const homeSeo = {
   ogTitle: "LeeCognitek | AI Startup Security Tools, LLM Security Scans, BYO LLM",
   ogDescription:
     "AI startup platform for security tools, LLM-based security scans, and BYO LLM enterprise deployments.",
-  canonical: "https://leecognitek.com/",
+  path: ROUTES.home,
 };
 
 const vulnitekSeo = {
@@ -286,7 +289,7 @@ const vulnitekSeo = {
   ogTitle: "Vulnitek | Integrated Vulnerability and Patch Management Platform",
   ogDescription:
     "Discover, prioritize, and remediate vulnerabilities with AI-assisted triage and enterprise patch orchestration in one platform.",
-  canonical: "https://leecognitek.com/vulnitek",
+  path: ROUTES.vulnitek,
 };
 
 const vulnitekStats = [
@@ -380,7 +383,7 @@ const mantrikaSeo = {
   ogTitle: "Mantrika | Intelligent RPA for Enterprise Operations",
   ogDescription:
     "Automate high-volume enterprise workflows with intelligent orchestration, approvals, and audit-ready operations.",
-  canonical: "https://leecognitek.com/mantrika",
+  path: ROUTES.mantrika,
 };
 
 const mantrikaStats = [
@@ -474,7 +477,7 @@ const lstatSeo = {
   ogTitle: "Lstat | Healthcare Coding and Statistical Analytics Automation",
   ogDescription:
     "Automate coding validation, statistical analytics, and healthcare reporting workflows with enterprise-grade controls and auditability.",
-  canonical: "https://leecognitek.com/lstat",
+  path: ROUTES.lstat,
 };
 
 const lstatStats = [
@@ -641,17 +644,48 @@ function upsertMetaByProperty(property, content) {
 
 function applySeoMeta(meta) {
   if (typeof document === "undefined") return;
+  const canonical = meta.path ? siteUrl(meta.path) : meta.canonical;
   document.title = meta.title;
   upsertMetaByName("description", meta.description);
   upsertMetaByName("keywords", meta.keywords);
   upsertMetaByProperty("og:title", meta.ogTitle);
   upsertMetaByProperty("og:description", meta.ogDescription);
-  upsertMetaByProperty("og:url", meta.canonical);
+  upsertMetaByProperty("og:url", canonical);
   upsertMetaByName("twitter:title", meta.ogTitle);
   upsertMetaByName("twitter:description", meta.ogDescription);
-  upsertMetaByName("twitter:url", meta.canonical);
+  upsertMetaByName("twitter:url", canonical);
   const canonicalTag = document.querySelector('link[rel="canonical"]');
-  if (canonicalTag) canonicalTag.setAttribute("href", meta.canonical);
+  if (canonicalTag) canonicalTag.setAttribute("href", canonical);
+}
+
+function AppLink({ to, children, onClick, ...props }) {
+  const href = appPath(to);
+  const handleClick = (event) => {
+    onClick?.(event);
+    if (event.defaultPrevented) return;
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
+    event.preventDefault();
+    window.history.pushState(null, "", href);
+    window.dispatchEvent(new PopStateEvent("popstate"));
+  };
+
+  return (
+    <a href={href} onClick={handleClick} {...props}>
+      {children}
+    </a>
+  );
+}
+
+function useAppPathname() {
+  const [pathname, setPathname] = useState(() => getAppPathname());
+
+  useEffect(() => {
+    const syncPath = () => setPathname(getAppPathname());
+    window.addEventListener("popstate", syncPath);
+    return () => window.removeEventListener("popstate", syncPath);
+  }, []);
+
+  return pathname;
 }
 
 function ShowcaseCarousel({ shots, productName = "Product", autoSlideMs = 2800, surfaceClassName = "" }) {
@@ -769,6 +803,73 @@ function ShowcaseCarousel({ shots, productName = "Product", autoSlideMs = 2800, 
 }
 
 function VulnitekPage() {
+  const [trialForm, setTrialForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    company: "",
+    teamSize: "",
+    message: "",
+  });
+  const [trialBusy, setTrialBusy] = useState(false);
+  const [trialMsg, setTrialMsg] = useState("");
+
+  const onTrialFormChange = (e) => {
+    const { name, value } = e.target;
+    setTrialForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const onTrialSubmit = async (e) => {
+    e.preventDefault();
+    setTrialMsg("");
+    setTrialBusy(true);
+
+    const autoMessage = [
+      "Requested Vulnitek 30-day free trial.",
+      `Team size: ${trialForm.teamSize || "-"}.`,
+      trialForm.message ? `Notes: ${trialForm.message}` : "",
+    ]
+      .filter(Boolean)
+      .join(" ");
+
+    try {
+      const res = await fetch(apiPath("/api/contact"), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: trialForm.name,
+          email: trialForm.email,
+          phone: trialForm.phone,
+          company: trialForm.company,
+          interest: "Vulnitek 30-day trial",
+          investorRequest: false,
+          trialRequest: true,
+          message: autoMessage,
+        }),
+      });
+
+      const out = await res.json();
+      if (!res.ok || !out?.ok) {
+        throw new Error(out?.error || "Failed to submit free trial request.");
+      }
+
+      setTrialMsg("Thanks. Your 30-day trial request is received. We will contact you shortly.");
+      setTrialForm({
+        name: "",
+        email: "",
+        phone: "",
+        company: "",
+        teamSize: "",
+        message: "",
+      });
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      setTrialMsg(message || "Submission failed.");
+    } finally {
+      setTrialBusy(false);
+    }
+  };
+
   return (
     <div className="page-shell vulnitek-shell">
       <a className="skip-link" href="#v-main">
@@ -780,7 +881,7 @@ function VulnitekPage() {
 
       <main className="site vulnitek-site" id="v-main">
         <header className="topbar">
-          <a className="brand" href="/">
+          <AppLink className="brand" to={ROUTES.home}>
             <img
               src={brandLogo}
               alt="LeeCognitek logo"
@@ -791,7 +892,7 @@ function VulnitekPage() {
               fetchPriority="high"
             />
             <span>LeeCognitek</span>
-          </a>
+          </AppLink>
           <nav className="topnav" aria-label="Vulnitek primary navigation">
             <a href="#v-overview">Overview</a>
             <a href="#v-capabilities">Capabilities</a>
@@ -802,8 +903,25 @@ function VulnitekPage() {
           </nav>
         </header>
 
+        <a className="trial-top-ribbon reveal" href="#v-contact">
+          <span>30-day free trial. No credit card required!</span>
+          <strong>Start Trial</strong>
+        </a>
+
         <section className="v-hero reveal" id="v-overview">
           <div className="v-hero-copy">
+            <div className="product-identity">
+              <img
+                src={vulnitekLogo}
+                alt="Vulnitek logo"
+                className="product-identity-logo"
+                width="48"
+                height="48"
+                loading="eager"
+                decoding="async"
+              />
+              <span>Vulnitek</span>
+            </div>
             <p className="kicker">Vulnitek Platform</p>
             <h1>Integrated vulnerability and patch management for modern security operations.</h1>
             <p className="subheadline">
@@ -936,22 +1054,103 @@ function VulnitekPage() {
         </section>
 
         <section className="section cta reveal" id="v-contact">
-          <p className="kicker">Get Started</p>
-          <h2>Book a Vulnitek walkthrough for your security team</h2>
-          <p>
-            Share your current vulnerability and patch workflow. We&apos;ll map a practical rollout model with metrics,
-            governance, and integration planning.
-          </p>
-          <div className="inline-actions">
-            <a className="btn btn-primary" href="mailto:info@leecognitek.com?subject=Vulnitek%20Demo%20Request">
-              Request demo
-            </a>
-            <a className="btn btn-secondary" href="tel:+919010994629">
-              Call +91 90109 94629
-            </a>
-            <a className="btn btn-secondary" href="/">
-              Back to company site
-            </a>
+          <p className="kicker">Free Trial</p>
+          <h2>Start Vulnitek with a 30-day free trial</h2>
+
+          <div className="contact-grid">
+            <article className="panel contact-panel v-trial-info">
+              <h3>What happens after you request trial access</h3>
+              <ul className="bullets">
+                <li>Our team reviews your request and reaches out manually by email</li>
+                <li>We configure your trial workspace and onboarding schedule</li>
+                <li>You get guided setup support for your first security workflow</li>
+              </ul>
+              <div className="inline-actions">
+                <a className="btn btn-secondary" href="tel:+919010994629">
+                  Call +91 90109 94629
+                </a>
+                <AppLink className="btn btn-secondary" to={ROUTES.home}>
+                  Back to company site
+                </AppLink>
+              </div>
+            </article>
+
+            <form className="panel contact-panel form-panel" onSubmit={onTrialSubmit}>
+              <h3>Request Vulnitek free trial</h3>
+              <div className="form-row">
+                <input
+                  name="name"
+                  value={trialForm.name}
+                  onChange={onTrialFormChange}
+                  placeholder="Your name"
+                  autoComplete="name"
+                  aria-label="Your name"
+                  required
+                />
+                <input
+                  name="email"
+                  type="email"
+                  value={trialForm.email}
+                  onChange={onTrialFormChange}
+                  placeholder="Work email"
+                  autoComplete="email"
+                  aria-label="Work email"
+                  required
+                />
+              </div>
+
+              <div className="form-row">
+                <input
+                  name="phone"
+                  value={trialForm.phone}
+                  onChange={onTrialFormChange}
+                  placeholder="Phone number"
+                  autoComplete="tel"
+                  aria-label="Phone number"
+                />
+                <input
+                  name="company"
+                  value={trialForm.company}
+                  onChange={onTrialFormChange}
+                  placeholder="Company"
+                  autoComplete="organization"
+                  aria-label="Company"
+                />
+              </div>
+
+              <div className="form-row form-row-single">
+                <select
+                  name="teamSize"
+                  value={trialForm.teamSize}
+                  onChange={onTrialFormChange}
+                  aria-label="Team size"
+                >
+                  <option value="">Team size (optional)</option>
+                  <option value="1-10">1-10</option>
+                  <option value="11-50">11-50</option>
+                  <option value="51-200">51-200</option>
+                  <option value="201+">201+</option>
+                </select>
+              </div>
+
+              <div className="form-row form-row-single">
+                <textarea
+                  name="message"
+                  value={trialForm.message}
+                  onChange={onTrialFormChange}
+                  placeholder="Primary use case or notes (optional)"
+                  aria-label="Primary use case"
+                  rows={3}
+                />
+              </div>
+
+              <div className="inline-actions">
+                <button className="btn btn-primary" type="submit" disabled={trialBusy}>
+                  {trialBusy ? "Submitting..." : "Request 30-day free trial"}
+                </button>
+              </div>
+              {trialMsg ? <p className="form-msg">{trialMsg}</p> : null}
+            </form>
           </div>
         </section>
       </main>
@@ -971,7 +1170,7 @@ function MantrikaPage() {
 
       <main className="site vulnitek-site" id="m-main">
         <header className="topbar">
-          <a className="brand" href="/">
+          <AppLink className="brand" to={ROUTES.home}>
             <img
               src={brandLogo}
               alt="LeeCognitek logo"
@@ -982,7 +1181,7 @@ function MantrikaPage() {
               fetchPriority="high"
             />
             <span>LeeCognitek</span>
-          </a>
+          </AppLink>
           <nav className="topnav" aria-label="Mantrika primary navigation">
             <a href="#m-overview">Overview</a>
             <a href="#m-capabilities">Capabilities</a>
@@ -994,6 +1193,18 @@ function MantrikaPage() {
 
         <section className="v-hero reveal" id="m-overview">
           <div className="v-hero-copy">
+            <div className="product-identity">
+              <img
+                src={mantrikaLogo}
+                alt="Mantrika logo"
+                className="product-identity-logo"
+                width="48"
+                height="48"
+                loading="eager"
+                decoding="async"
+              />
+              <span>Mantrika</span>
+            </div>
             <p className="kicker">Mantrika Platform</p>
             <h1>Intelligent RPA that learns workflows from real user-recorded steps.</h1>
             <p className="subheadline">
@@ -1127,9 +1338,9 @@ function MantrikaPage() {
             <a className="btn btn-secondary" href="tel:+919010994629">
               Call +91 90109 94629
             </a>
-            <a className="btn btn-secondary" href="/">
+            <AppLink className="btn btn-secondary" to={ROUTES.home}>
               Back to company site
-            </a>
+            </AppLink>
           </div>
         </section>
       </main>
@@ -1149,7 +1360,7 @@ function LstatPage() {
 
       <main className="site vulnitek-site" id="l-main">
         <header className="topbar">
-          <a className="brand" href="/">
+          <AppLink className="brand" to={ROUTES.home}>
             <img
               src={brandLogo}
               alt="LeeCognitek logo"
@@ -1160,7 +1371,7 @@ function LstatPage() {
               fetchPriority="high"
             />
             <span>LeeCognitek</span>
-          </a>
+          </AppLink>
           <nav className="topnav" aria-label="Lstat primary navigation">
             <a href="#l-overview">Overview</a>
             <a href="#l-capabilities">Capabilities</a>
@@ -1172,6 +1383,18 @@ function LstatPage() {
 
         <section className="v-hero reveal" id="l-overview">
           <div className="v-hero-copy">
+            <div className="product-identity">
+              <img
+                src={lstatLogo}
+                alt="Lstat logo"
+                className="product-identity-logo"
+                width="48"
+                height="48"
+                loading="eager"
+                decoding="async"
+              />
+              <span>Lstat</span>
+            </div>
             <p className="kicker">Lstat Platform</p>
             <h1>Medical coding and statistical analytics automation for healthcare execution teams.</h1>
             <p className="subheadline">
@@ -1305,9 +1528,9 @@ function LstatPage() {
             <a className="btn btn-secondary" href="tel:+919010994629">
               Call +91 90109 94629
             </a>
-            <a className="btn btn-secondary" href="/">
+            <AppLink className="btn btn-secondary" to={ROUTES.home}>
               Back to company site
-            </a>
+            </AppLink>
           </div>
         </section>
       </main>
@@ -1316,10 +1539,10 @@ function LstatPage() {
 }
 
 function App() {
-  const currentPath = typeof window !== "undefined" ? window.location.pathname.toLowerCase() : "/";
-  const isVulnitekPage = currentPath === "/vulnitek" || currentPath === "/vulnitek/";
-  const isMantrikaPage = currentPath === "/mantrika" || currentPath === "/mantrika/";
-  const isLstatPage = currentPath === "/lstat" || currentPath === "/lstat/";
+  const currentPath = useAppPathname();
+  const isVulnitekPage = isAppRoute(currentPath, ROUTES.vulnitek);
+  const isMantrikaPage = isAppRoute(currentPath, ROUTES.mantrika);
+  const isLstatPage = isAppRoute(currentPath, ROUTES.lstat);
 
   const [form, setForm] = useState({
     name: "",
@@ -1359,7 +1582,7 @@ function App() {
     setFormMsg("");
     setFormBusy(true);
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch(apiPath("/api/contact"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
@@ -1421,10 +1644,25 @@ function App() {
             <span>LeeCognitek</span>
           </a>
           <nav className="topnav" aria-label="Primary">
-            <a href="#products">Products</a>
-            <a href="/vulnitek">Vulnitek</a>
-            <a href="/mantrika">Mantrika</a>
-            <a href="/lstat">Lstat</a>
+            <div className="nav-dropdown">
+              <button className="nav-dropdown-trigger" type="button" aria-haspopup="true">
+                Products <span className="nav-caret" aria-hidden="true">▾</span>
+              </button>
+              <div className="nav-dropdown-menu" role="menu" aria-label="Product pages">
+                <a href="#products" role="menuitem">
+                  All products
+                </a>
+                <AppLink to={ROUTES.vulnitek} role="menuitem">
+                  Vulnitek
+                </AppLink>
+                <AppLink to={ROUTES.mantrika} role="menuitem">
+                  Mantrika
+                </AppLink>
+                <AppLink to={ROUTES.lstat} role="menuitem">
+                  Lstat
+                </AppLink>
+              </div>
+            </div>
             <a href="#services">Services</a>
             <a href="#investors">Investors</a>
             <a href="#contact">Contact</a>
@@ -1449,9 +1687,15 @@ function App() {
             <a className="btn btn-primary" href="#products">
               Explore products
             </a>
-            <a className="btn btn-secondary" href="/vulnitek">
+            <AppLink className="btn btn-secondary" to={ROUTES.vulnitek}>
               Open Vulnitek page
-            </a>
+            </AppLink>
+            <AppLink className="btn btn-secondary" to={ROUTES.mantrika}>
+              Open Mantrika page
+            </AppLink>
+            <AppLink className="btn btn-secondary" to={ROUTES.lstat}>
+              Open Lstat page
+            </AppLink>
             <a className="btn btn-secondary" href="#investors">
               View investor section
             </a>
@@ -1496,12 +1740,12 @@ function App() {
           </div>
           <div className="card-grid">
             {products.map((product) => {
-              const productHref = productPageLinks[product.name];
+              const productHref = PRODUCT_ROUTES[product.name];
               return productHref ? (
-                <a
+                <AppLink
                   key={product.name}
                   className="product-card product-card-link"
-                  href={productHref}
+                  to={productHref}
                   aria-label={`Open ${product.name} page`}
                 >
                   <div className="product-head">
@@ -1527,7 +1771,7 @@ function App() {
                       <li key={point}>{point}</li>
                     ))}
                   </ul>
-                </a>
+                </AppLink>
               ) : (
                 <article key={product.name} className="product-card">
                   <div className="product-head">
@@ -1557,18 +1801,6 @@ function App() {
               );
             })}
           </div>
-        </section>
-
-        <section className="section reveal" id="showcase">
-          <div className="section-head">
-            <p className="kicker">Vulnitek Product UI</p>
-            <h2>Live interface showcase with enterprise-ready product depth</h2>
-          </div>
-
-          <ShowcaseCarousel
-            shots={vulnitekUiShots}
-            productName="Vulnitek"
-          />
         </section>
 
         <section className="section reveal" id="services">

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node scripts/sync-output-dir.mjs",
+    "build": "vite build && node scripts/generate-seo-files.mjs && node scripts/sync-output-dir.mjs",
     "start": "node server.js",
     "lint": "eslint .",
     "preview": "vite preview"

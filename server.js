@@ -10,10 +10,43 @@ const app = express();
 const port = Number(process.env.PORT || 3000);
 const distDir = path.join(__dirname, "dist");
 const indexHtmlPath = path.join(distDir, "index.html");
-const SITE_URL = "https://leecognitek.com";
 const DEFAULT_ROBOTS = "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1";
 
-const seoByPath = {
+function normalizePathname(value = "/") {
+  let normalized = value || "/";
+  try {
+    normalized = decodeURIComponent(normalized);
+  } catch {
+    normalized = value || "/";
+  }
+  normalized = normalized.toLowerCase();
+  if (normalized.length > 1 && normalized.endsWith("/")) {
+    normalized = normalized.slice(0, -1);
+  }
+  return normalized || "/";
+}
+
+const SITE_URL = String(process.env.SITE_URL || process.env.VITE_SITE_URL || "").replace(/\/$/, "") ||
+  (process.env.NODE_ENV === "production" ? "" : "http://localhost:3000");
+const BASE_PATH = normalizePathname(process.env.BASE_PATH || process.env.VITE_BASE_PATH || "/");
+
+function resolveSiteUrl(req) {
+  if (SITE_URL) return SITE_URL;
+  const protocol = req.get("x-forwarded-proto") || req.protocol || "http";
+  const host = req.get("x-forwarded-host") || req.get("host") || "localhost";
+  return `${protocol}://${host}`.replace(/\/$/, "");
+}
+
+function resolveAppPathname(req) {
+  let pathname = normalizePathname(req.path);
+  if (BASE_PATH !== "/" && pathname.startsWith(BASE_PATH)) {
+    pathname = normalizePathname(pathname.slice(BASE_PATH.length) || "/");
+  }
+  return pathname;
+}
+
+function buildSeoByPath(siteUrl) {
+  return {
   "/": {
     title: "LeeCognitek | AI Startup Security Tools, LLM Security Scans, BYO LLM",
     description:
@@ -23,7 +56,7 @@ const seoByPath = {
     ogTitle: "LeeCognitek | AI Startup Security Tools, LLM Security Scans, BYO LLM",
     ogDescription:
       "AI startup platform for security tools, LLM-based security scans, and BYO LLM enterprise deployments.",
-    canonical: `${SITE_URL}/`,
+    canonical: `${siteUrl}/`,
     robots: DEFAULT_ROBOTS,
   },
   "/vulnitek": {
@@ -35,7 +68,7 @@ const seoByPath = {
     ogTitle: "Vulnitek | Integrated Vulnerability and Patch Management Platform",
     ogDescription:
       "Discover, prioritize, and remediate vulnerabilities with AI-assisted triage and enterprise patch orchestration in one platform.",
-    canonical: `${SITE_URL}/vulnitek`,
+    canonical: `${siteUrl}/vulnitek`,
     robots: DEFAULT_ROBOTS,
   },
   "/mantrika": {
@@ -47,7 +80,7 @@ const seoByPath = {
     ogTitle: "Mantrika | Intelligent RPA for Enterprise Operations",
     ogDescription:
       "Automate high-volume enterprise workflows with intelligent orchestration, approvals, and audit-ready operations.",
-    canonical: `${SITE_URL}/mantrika`,
+    canonical: `${siteUrl}/mantrika`,
     robots: DEFAULT_ROBOTS,
   },
   "/lstat": {
@@ -59,10 +92,11 @@ const seoByPath = {
     ogTitle: "Lstat | Healthcare Coding and Statistical Analytics Automation",
     ogDescription:
       "Automate coding validation, statistical analytics, and healthcare reporting workflows with enterprise-grade controls and auditability.",
-    canonical: `${SITE_URL}/lstat`,
+    canonical: `${siteUrl}/lstat`,
     robots: DEFAULT_ROBOTS,
   },
-};
+  };
+}
 
 const productSchemaByPath = {
   "/vulnitek": {
@@ -87,20 +121,6 @@ const productSchemaByPath = {
     keywords: "medical coding automation, healthcare analytics, statistical workflow automation",
   },
 };
-
-function normalizePathname(value = "/") {
-  let normalized = value || "/";
-  try {
-    normalized = decodeURIComponent(normalized);
-  } catch {
-    normalized = value || "/";
-  }
-  normalized = normalized.toLowerCase();
-  if (normalized.length > 1 && normalized.endsWith("/")) {
-    normalized = normalized.slice(0, -1);
-  }
-  return normalized || "/";
-}
 
 function escapeHtmlText(value) {
   return String(value)
@@ -143,9 +163,9 @@ function replaceCanonical(html, href) {
   return replaceTagOrInject(html, pattern, replacement);
 }
 
-function buildStructuredData(pathname, seo) {
-  const organizationId = `${SITE_URL}/#organization`;
-  const websiteId = `${SITE_URL}/#website`;
+function buildStructuredData(pathname, seo, siteUrl) {
+  const organizationId = `${siteUrl}/#organization`;
+  const websiteId = `${siteUrl}/#website`;
   const webPageId = `${seo.canonical}#webpage`;
 
   const graph = [
@@ -153,8 +173,8 @@ function buildStructuredData(pathname, seo) {
       "@type": "Organization",
       "@id": organizationId,
       name: "LeeCognitek",
-      url: `${SITE_URL}/`,
-      logo: `${SITE_URL}/og-image.jpg`,
+      url: `${siteUrl}/`,
+      logo: `${siteUrl}/og-image.jpg`,
       description:
         "AI startup building security tools, LLM-based security scans, and Bring Your Own LLM enterprise solutions.",
       knowsAbout: [
@@ -171,7 +191,7 @@ function buildStructuredData(pathname, seo) {
     {
       "@type": "WebSite",
       "@id": websiteId,
-      url: `${SITE_URL}/`,
+      url: `${siteUrl}/`,
       name: "LeeCognitek",
       publisher: { "@id": organizationId },
       inLanguage: "en",
@@ -192,32 +212,32 @@ function buildStructuredData(pathname, seo) {
     graph.push(
       {
         "@type": "ItemList",
-        "@id": `${SITE_URL}/#products`,
+        "@id": `${siteUrl}/#products`,
         name: "LeeCognitek product portfolio",
         itemListElement: [
           {
             "@type": "ListItem",
             position: 1,
             name: "Vulnitek",
-            url: `${SITE_URL}/vulnitek`,
+            url: `${siteUrl}/vulnitek`,
           },
           {
             "@type": "ListItem",
             position: 2,
             name: "Mantrika",
-            url: `${SITE_URL}/mantrika`,
+            url: `${siteUrl}/mantrika`,
           },
           {
             "@type": "ListItem",
             position: 3,
             name: "Lstat",
-            url: `${SITE_URL}/lstat`,
+            url: `${siteUrl}/lstat`,
           },
         ],
       },
       {
         "@type": "FAQPage",
-        "@id": `${SITE_URL}/#faq`,
+        "@id": `${siteUrl}/#faq`,
         mainEntity: [
           {
             "@type": "Question",
@@ -271,7 +291,7 @@ function buildStructuredData(pathname, seo) {
             "@type": "ListItem",
             position: 1,
             name: "Home",
-            item: `${SITE_URL}/`,
+            item: `${siteUrl}/`,
           },
           {
             "@type": "ListItem",
@@ -290,7 +310,8 @@ function buildStructuredData(pathname, seo) {
   };
 }
 
-function injectSeoIntoHtml(template, pathname) {
+function injectSeoIntoHtml(template, pathname, siteUrl) {
+  const seoByPath = buildSeoByPath(siteUrl);
   const seo = seoByPath[pathname] || seoByPath["/"];
   let html = template;
   html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtmlText(seo.title)}</title>`);
@@ -305,7 +326,7 @@ function injectSeoIntoHtml(template, pathname) {
   html = replaceMetaName(html, "twitter:url", seo.canonical);
   html = replaceCanonical(html, seo.canonical);
 
-  const jsonLd = JSON.stringify(buildStructuredData(pathname, seo), null, 2);
+  const jsonLd = JSON.stringify(buildStructuredData(pathname, seo, siteUrl), null, 2);
   const schemaTag = `<script type="application/ld+json">\n${jsonLd}\n</script>`;
   html = replaceTagOrInject(html, /<script type="application\/ld\+json">[\s\S]*?<\/script>/i, schemaTag);
   return html;
@@ -348,15 +369,21 @@ async function sendLeadMail(lead) {
     `Phone: ${lead.phone || "-"}`,
     `Company: ${lead.company || "-"}`,
     `Interest: ${lead.interest || "-"}`,
+    `Trial request: ${lead.trial_request ? "yes" : "no"}`,
     `Investor request: ${lead.investor_request ? "yes" : "no"}`,
     "",
     lead.message || "",
   ].join("\n");
 
+  const leadTags = [];
+  if (lead.trial_request) leadTags.push("[TRIAL]");
+  if (lead.investor_request) leadTags.push("[INVESTOR]");
+  const leadPrefix = leadTags.length ? `${leadTags.join(" ")} ` : "";
+
   await transporter.sendMail({
     from,
     to,
-    subject: `${lead.investor_request ? "[INVESTOR] " : ""}New website lead: ${lead.name}`,
+    subject: `${leadPrefix}New website lead: ${lead.name}`,
     text,
   });
   return { mailed: true };
@@ -371,14 +398,23 @@ app.post("/api/contact", async (req, res) => {
       phone: String(body.phone || "").trim(),
       company: String(body.company || "").trim(),
       interest: String(body.interest || "").trim(),
+      trial_request: Boolean(body.trialRequest),
       investor_request: Boolean(body.investorRequest),
       message: String(body.message || "").trim(),
       source: "website",
       received_at: new Date().toISOString(),
     };
 
+    if (lead.trial_request && !lead.interest) {
+      lead.interest = "Vulnitek 30-day trial";
+    }
+
     if (lead.investor_request && !lead.interest) {
       lead.interest = "Investor discussion";
+    }
+
+    if (lead.trial_request && !lead.message) {
+      lead.message = "Requested Vulnitek 30-day free trial.";
     }
 
     if (!lead.name || !lead.email || !lead.message) {
@@ -401,10 +437,11 @@ app.get("/health", (_req, res) => {
 
 // SPA fallback so React routes work in production.
 app.get(/.*/, (req, res) => {
-  const normalizedPath = normalizePathname(req.path);
+  const normalizedPath = resolveAppPathname(req);
+  const siteUrl = resolveSiteUrl(req);
   try {
     const template = fs.readFileSync(indexHtmlPath, "utf8");
-    const html = injectSeoIntoHtml(template, normalizedPath);
+    const html = injectSeoIntoHtml(template, normalizedPath, siteUrl);
     res.setHeader("Content-Type", "text/html; charset=utf-8");
     res.setHeader("Cache-Control", "no-cache");
     res.setHeader("X-Robots-Tag", DEFAULT_ROBOTS);
