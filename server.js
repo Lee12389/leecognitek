@@ -55,13 +55,8 @@ function buildSeoByPath(siteUrl) {
       "AI-based security scanning, application security scanning, AI security scanning, vulnerability scanning platform, SAST DAST, BYOLLM, LeeCognitek, Vulnitek",
     ogTitle: "LeeCognitek | AI-Based Security Scanning and Applied AI Products",
     ogDescription:
-<<<<<<< HEAD
-      "AI startup platform for security tools, LLM-based security scans, and BYO LLM enterprise deployments.",
-    canonical: `${siteUrl}/`,
-=======
       "Applied AI startup helping enterprises adopt AI with security-first products, AI-based security scanning, and BYOLLM-ready deployment models.",
-    canonical: `${SITE_URL}/`,
->>>>>>> 248769d54da0084547a5c6c8c362b0d442a1609a
+    canonical: `${siteUrl}/`,
     robots: DEFAULT_ROBOTS,
   },
   "/vulnitek": {
@@ -72,13 +67,8 @@ function buildSeoByPath(siteUrl) {
       "Vulnitek, AI-based security scanning, application security scanning, vulnerability scanning, SAST DAST platform, BYOLLM security platform",
     ogTitle: "Vulnitek | AI-Based Security Scanning Platform",
     ogDescription:
-<<<<<<< HEAD
-      "Discover, prioritize, and remediate vulnerabilities with AI-assisted triage and enterprise patch orchestration in one platform.",
-    canonical: `${siteUrl}/vulnitek`,
-=======
       "Scan, prioritize, and remediate vulnerabilities across apps and APIs with AI-assisted triage, BYOLLM flexibility, and managed deployment options.",
-    canonical: `${SITE_URL}/vulnitek`,
->>>>>>> 248769d54da0084547a5c6c8c362b0d442a1609a
+    canonical: `${siteUrl}/vulnitek`,
     robots: DEFAULT_ROBOTS,
   },
   "/mantrika": {
@@ -89,13 +79,8 @@ function buildSeoByPath(siteUrl) {
       "Mantrika, intelligent RPA, enterprise automation platform, workflow automation, AI automation, human in loop RPA",
     ogTitle: "Mantrika | Intelligent RPA Platform Under Development",
     ogDescription:
-<<<<<<< HEAD
-      "Automate high-volume enterprise workflows with intelligent orchestration, approvals, and audit-ready operations.",
-    canonical: `${siteUrl}/mantrika`,
-=======
       "Join the waitlist for LeeCognitek's recorder-first intelligent RPA platform for governed enterprise automation.",
-    canonical: `${SITE_URL}/mantrika`,
->>>>>>> 248769d54da0084547a5c6c8c362b0d442a1609a
+    canonical: `${siteUrl}/mantrika`,
     robots: DEFAULT_ROBOTS,
   },
   "/lstat": {
@@ -106,13 +91,8 @@ function buildSeoByPath(siteUrl) {
       "Lstat, medical coding automation, statistical analytics automation, healthcare analytics platform, clinical data workflows, healthcare AI operations",
     ogTitle: "Lstat | Healthcare Coding Platform Under Development",
     ogDescription:
-<<<<<<< HEAD
-      "Automate coding validation, statistical analytics, and healthcare reporting workflows with enterprise-grade controls and auditability.",
-    canonical: `${siteUrl}/lstat`,
-=======
       "Join the early-access conversation for LeeCognitek's healthcare coding and analytics platform under development.",
-    canonical: `${SITE_URL}/lstat`,
->>>>>>> 248769d54da0084547a5c6c8c362b0d442a1609a
+    canonical: `${siteUrl}/lstat`,
     robots: DEFAULT_ROBOTS,
   },
   };
@@ -193,13 +173,8 @@ function buildStructuredData(pathname, seo, siteUrl) {
       "@type": "Organization",
       "@id": organizationId,
       name: "LeeCognitek",
-<<<<<<< HEAD
       url: `${siteUrl}/`,
-      logo: `${siteUrl}/og-image.jpg`,
-=======
-      url: `${SITE_URL}/`,
-      logo: `${SITE_URL}/leecognitek-logo.jpg`,
->>>>>>> 248769d54da0084547a5c6c8c362b0d442a1609a
+      logo: `${siteUrl}/leecognitek-logo.jpg`,
       description:
         "Applied AI startup helping enterprises adopt AI with secure products, automation systems, and AI-based security scanning.",
       knowsAbout: [
@@ -392,13 +367,9 @@ async function sendLeadMail(lead) {
     `Name: ${lead.name}`,
     `Email: ${lead.email}`,
     `Company: ${lead.company || "-"}`,
-<<<<<<< HEAD
-    `Interest: ${lead.interest || "-"}`,
+    `Interest: ${lead.interest || "General inquiry"}`,
     `Trial request: ${lead.trial_request ? "yes" : "no"}`,
     `Investor request: ${lead.investor_request ? "yes" : "no"}`,
-=======
-    `Interest: ${lead.interest || "General inquiry"}`,
->>>>>>> 248769d54da0084547a5c6c8c362b0d442a1609a
     "",
     lead.message || "",
   ].join("\n");
@@ -411,13 +382,9 @@ async function sendLeadMail(lead) {
   await transporter.sendMail({
     from,
     to,
-<<<<<<< HEAD
-    subject: `${leadPrefix}New website lead: ${lead.name}`,
-=======
+    subject: `${leadPrefix}New website request: ${lead.interest || lead.name}`,
     bcc,
     replyTo: lead.email,
-    subject: `New website request: ${lead.interest || lead.name}`,
->>>>>>> 248769d54da0084547a5c6c8c362b0d442a1609a
     text,
   });
   return { mailed: true };
@@ -430,19 +397,14 @@ app.post("/api/contact", async (req, res) => {
       name: String(body.name || "").trim(),
       email: String(body.email || "").trim(),
       company: String(body.company || "").trim(),
-<<<<<<< HEAD
-      interest: String(body.interest || "").trim(),
+      interest: String(body.interest || "General inquiry").trim(),
       trial_request: Boolean(body.trialRequest),
       investor_request: Boolean(body.investorRequest),
-=======
-      interest: String(body.interest || "General inquiry").trim(),
->>>>>>> 248769d54da0084547a5c6c8c362b0d442a1609a
       message: String(body.message || "").trim(),
       source: "website",
       received_at: new Date().toISOString(),
     };
 
-<<<<<<< HEAD
     if (lead.trial_request && !lead.interest) {
       lead.interest = "Vulnitek 30-day trial";
     }
@@ -455,8 +417,6 @@ app.post("/api/contact", async (req, res) => {
       lead.message = "Requested Vulnitek 30-day free trial.";
     }
 
-=======
->>>>>>> 248769d54da0084547a5c6c8c362b0d442a1609a
     if (!lead.name || !lead.email || !lead.message) {
       return res.status(400).json({ ok: false, error: "Name, email, and message are required." });
     }

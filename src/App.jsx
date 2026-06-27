@@ -276,13 +276,8 @@ const homeSeo = {
     "AI-based security scanning, application security scanning, AI security scanning, vulnerability scanning platform, SAST DAST, BYOLLM, LeeCognitek, Vulnitek",
   ogTitle: "LeeCognitek | AI-Based Security Scanning and Applied AI Products",
   ogDescription:
-<<<<<<< HEAD
-    "AI startup platform for security tools, LLM-based security scans, and BYO LLM enterprise deployments.",
-  path: ROUTES.home,
-=======
     "Applied AI startup helping enterprises adopt AI with security-first products, AI-based security scanning, and BYOLLM-ready deployment models.",
-  canonical: "https://leecognitek.com/",
->>>>>>> 248769d54da0084547a5c6c8c362b0d442a1609a
+  path: ROUTES.home,
 };
 
 const vulnitekSeo = {
@@ -293,13 +288,8 @@ const vulnitekSeo = {
     "Vulnitek, AI-based security scanning, application security scanning, SAST DAST platform, vulnerability scanning, BYOLLM security platform",
   ogTitle: "Vulnitek | AI-Based Security Scanning Platform",
   ogDescription:
-<<<<<<< HEAD
-    "Discover, prioritize, and remediate vulnerabilities with AI-assisted triage and enterprise patch orchestration in one platform.",
-  path: ROUTES.vulnitek,
-=======
     "Scan, prioritize, and remediate vulnerabilities across apps and APIs with AI-assisted triage, BYOLLM flexibility, and managed deployment options.",
-  canonical: "https://leecognitek.com/vulnitek",
->>>>>>> 248769d54da0084547a5c6c8c362b0d442a1609a
+  path: ROUTES.vulnitek,
 };
 
 const vulnitekStats = [
@@ -393,13 +383,8 @@ const mantrikaSeo = {
     "Mantrika, intelligent RPA, enterprise automation platform, workflow automation, AI automation, human in loop RPA",
   ogTitle: "Mantrika | Intelligent RPA Platform Under Development",
   ogDescription:
-<<<<<<< HEAD
-    "Automate high-volume enterprise workflows with intelligent orchestration, approvals, and audit-ready operations.",
-  path: ROUTES.mantrika,
-=======
     "Join the waitlist for LeeCognitek's recorder-first intelligent RPA platform for governed enterprise automation.",
-  canonical: "https://leecognitek.com/mantrika",
->>>>>>> 248769d54da0084547a5c6c8c362b0d442a1609a
+  path: ROUTES.mantrika,
 };
 
 const mantrikaStats = [
@@ -492,13 +477,8 @@ const lstatSeo = {
     "Lstat, medical coding automation, statistical analytics automation, healthcare analytics platform, clinical data workflows, healthcare AI operations",
   ogTitle: "Lstat | Healthcare Coding Platform Under Development",
   ogDescription:
-<<<<<<< HEAD
-    "Automate coding validation, statistical analytics, and healthcare reporting workflows with enterprise-grade controls and auditability.",
-  path: ROUTES.lstat,
-=======
     "Join the early-access conversation for LeeCognitek's healthcare coding and analytics platform under development.",
-  canonical: "https://leecognitek.com/lstat",
->>>>>>> 248769d54da0084547a5c6c8c362b0d442a1609a
+  path: ROUTES.lstat,
 };
 
 const lstatStats = [
@@ -944,7 +924,7 @@ function VulnitekPage() {
               <span>Vulnitek</span>
             </div>
             <p className="kicker">Vulnitek Platform</p>
-            <h1>AI-based security scanning for modern apps, APIs, and enterprise delivery teams.</h1>
+            <h1>Your first AI Application Security Engineer.</h1>
             <p className="subheadline">
               Vulnitek helps teams discover, prioritize, and remediate vulnerabilities with unified SAST and DAST,
               AI-assisted triage, a 30-day BYOLLM trial, and LeeCognitek-hosted deployment options with usage-based
@@ -1076,7 +1056,6 @@ function VulnitekPage() {
         </section>
 
         <section className="section cta reveal" id="v-contact">
-<<<<<<< HEAD
           <p className="kicker">Free Trial</p>
           <h2>Start Vulnitek with a 30-day free trial</h2>
 
@@ -1174,21 +1153,6 @@ function VulnitekPage() {
               </div>
               {trialMsg ? <p className="form-msg">{trialMsg}</p> : null}
             </form>
-=======
-          <p className="kicker">Get Started</p>
-          <h2>Start a Vulnitek evaluation for your security team</h2>
-          <p>
-            Share your current application security workflow and we&apos;ll map the right path, whether that is a
-            30-day BYOLLM evaluation or a LeeCognitek-hosted rollout with managed operations.
-          </p>
-          <div className="inline-actions">
-            <a className="btn btn-primary" href="mailto:info@leecognitek.com?subject=Vulnitek%20Demo%20Request">
-              Request demo
-            </a>
-            <a className="btn btn-secondary" href="/">
-              Back to company site
-            </a>
->>>>>>> 248769d54da0084547a5c6c8c362b0d442a1609a
           </div>
         </section>
       </main>
@@ -1231,7 +1195,6 @@ function MantrikaPage() {
 
         <section className="v-hero reveal" id="m-overview">
           <div className="v-hero-copy">
-<<<<<<< HEAD
             <div className="product-identity">
               <img
                 src={mantrikaLogo}
@@ -1244,10 +1207,7 @@ function MantrikaPage() {
               />
               <span>Mantrika</span>
             </div>
-            <p className="kicker">Mantrika Platform</p>
-=======
             <p className="kicker">Mantrika | Under Development</p>
->>>>>>> 248769d54da0084547a5c6c8c362b0d442a1609a
             <h1>Intelligent RPA that learns workflows from real user-recorded steps.</h1>
             <p className="subheadline">
               Mantrika is under development as a recorder-first intelligent RPA platform. It captures process steps
@@ -1423,7 +1383,6 @@ function LstatPage() {
 
         <section className="v-hero reveal" id="l-overview">
           <div className="v-hero-copy">
-<<<<<<< HEAD
             <div className="product-identity">
               <img
                 src={lstatLogo}
@@ -1436,10 +1395,7 @@ function LstatPage() {
               />
               <span>Lstat</span>
             </div>
-            <p className="kicker">Lstat Platform</p>
-=======
             <p className="kicker">Lstat | Under Development</p>
->>>>>>> 248769d54da0084547a5c6c8c362b0d442a1609a
             <h1>Medical coding and statistical analytics automation for healthcare execution teams.</h1>
             <p className="subheadline">
               Lstat is under development as a healthcare-focused platform to automate coding workflows, improve data
@@ -1722,24 +1678,12 @@ function App() {
             ))}
           </div>
           <div className="hero-actions">
-            <a className="btn btn-primary" href="/vulnitek">
+            <AppLink className="btn btn-primary" to={ROUTES.vulnitek}>
               Explore Vulnitek
-            </a>
-<<<<<<< HEAD
-            <AppLink className="btn btn-secondary" to={ROUTES.vulnitek}>
-              Open Vulnitek page
             </AppLink>
-            <AppLink className="btn btn-secondary" to={ROUTES.mantrika}>
-              Open Mantrika page
-            </AppLink>
-            <AppLink className="btn btn-secondary" to={ROUTES.lstat}>
-              Open Lstat page
-            </AppLink>
-=======
             <a className="btn btn-secondary" href="#products">
               View portfolio
             </a>
->>>>>>> 248769d54da0084547a5c6c8c362b0d442a1609a
             <a className="btn btn-secondary" href="#investors">
               View investor section
             </a>
